@@ -1,4 +1,4 @@
-package com.f1.records.services;
+package com.f1.records.services.status;
 
 import com.f1.records.pojos.Status;
 
