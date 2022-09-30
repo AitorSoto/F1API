@@ -1,7 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.ConstructorResults;
-import com.f1.records.pojos.ConstructorStandings;
+import com.f1.records.pojos.ConstructorStanding;
 import com.f1.records.services.constructorStandings.ConstructorStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +17,12 @@ public class ConstructorStandingsConstroller {
     ConstructorStandingsServiceImpl constructorService;
 
     @GetMapping(value = "/constructorStandings")
-    public ResponseEntity<List<ConstructorStandings>> getConstructorResults() {
+    public ResponseEntity<List<ConstructorStanding>> getConstructorResults() {
         return new ResponseEntity<>(constructorService.findAllConstructorStandings(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/constructorStandingsById/{id}")
-    public ResponseEntity<List<ConstructorStandings>> getConstructorResultsById(@PathVariable int id) {
+    public ResponseEntity<List<ConstructorStanding>> getConstructorResultsById(@PathVariable int id) {
         return new ResponseEntity<>(constructorService.findConstructorStandingsById(id), HttpStatus.OK);
     }
 }

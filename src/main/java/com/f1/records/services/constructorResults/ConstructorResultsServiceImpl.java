@@ -1,6 +1,6 @@
 package com.f1.records.services.constructorResults;
 
-import com.f1.records.pojos.ConstructorResults;
+import com.f1.records.pojos.ConstructorResult;
 import com.f1.records.repositorys.ConstructorResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,19 @@ public class ConstructorResultsServiceImpl implements ConstructorResultsService{
     ConstructorResultsRepository constructorRespository;
 
     @Override
-    public List<ConstructorResults> getAllConstructorResults() {
-        Iterable<ConstructorResults> optionalResults = constructorRespository.findAll();
-        List<ConstructorResults> constructorResults = new ArrayList<>();
+    public List<ConstructorResult> getAllConstructorResults() {
+        Iterable<ConstructorResult> optionalResults = constructorRespository.findAll();
+        List<ConstructorResult> constructorResults = new ArrayList<>();
         optionalResults.forEach(constructorResults::add);
         return constructorResults;
     }
 
     @Override
-    public List<ConstructorResults> getAllConstructorResultsById(int idConstructor) {
-        Iterable<ConstructorResults> optionalResults = constructorRespository.findAll();
-        List<ConstructorResults> constructorResults = new ArrayList<>();
+    public List<ConstructorResult> getAllConstructorResultsById(int idConstructor) {
+        Iterable<ConstructorResult> optionalResults = constructorRespository.findAll();
+        List<ConstructorResult> constructorResults = new ArrayList<>();
         optionalResults.forEach(constructorResults::add);
-        List<ConstructorResults> filteredConstructorResults =
+        List<ConstructorResult> filteredConstructorResults =
                 constructorResults.stream()
                 .filter(constructor -> constructor.getConstructorId() == idConstructor)
                 .collect(Collectors.toList());

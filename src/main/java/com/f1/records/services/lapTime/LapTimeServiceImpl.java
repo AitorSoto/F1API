@@ -36,24 +36,24 @@ public class LapTimeServiceImpl implements LapTimeService{
     @Override
     public List<LapTime> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<LapTime> lapTimePage = lapTimeRepository.getByDriverIdAndRaceId(driverId, raceId, paging);
-        List<LapTime> lapTimes = lapTimePage.getContent()
+        Page<LapTime> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
+        /*List<LapTime> lapTimes = lapTimePage.getContent()
                 .stream()
                 .filter(lapTime -> lapTime.getDriverId() == driverId
                         && lapTime.getRaceId() == raceId)
-                .collect(Collectors.toList());
-        return lapTimes;
+                .collect(Collectors.toList());*/
+        return lapTimePage.getContent();
     }
 
     @Override
-    public List<LapTime> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) {
+    public List<LapTime> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) { // MAAAAAL
         Pageable paging = PageRequest.of(pageNo, pageSize);
-        Page<LapTime> lapTimePage = lapTimeRepository.getByDriverIdAndRaceId(driverId, raceId, paging);
-        List<LapTime> lapTimes = lapTimePage.getContent()
+        Page<LapTime> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
+        /*List<LapTime> lapTimes = lapTimePage.getContent()
                 .stream()
                 .filter(lapTime -> lapTime.getDriverId() == driverId
                         && lapTime.getRaceId() == raceId)
-                .collect(Collectors.toList());
-        return lapTimes;
+                .collect(Collectors.toList());*/
+        return lapTimePage.getContent();
     }
 }

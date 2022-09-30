@@ -1,25 +1,29 @@
 package com.f1.records.pojos;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "laptimes")
-public class LapTime {
+@IdClass(LapTime.class)
+public class LapTime implements Serializable {
     @Id
+    @Column(name = "race_id")
     private int raceId;
+    @Id
+    @Column(name = "driver_id")
     private int driverId;
+    @Id
+    @Column(name = "lap")
     private int lap;
-    private String position;
+    private int position;
     private String time;
     private int milliseconds;
 
     public LapTime() {
     }
 
-    public LapTime(int raceId, int driverId, int lap, String position, String time, int milliseconds) {
+    public LapTime(int raceId, int driverId, int lap, int position, String time, int milliseconds) {
         this.raceId = raceId;
         this.driverId = driverId;
         this.lap = lap;
@@ -52,11 +56,11 @@ public class LapTime {
         this.lap = lap;
     }
 
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 

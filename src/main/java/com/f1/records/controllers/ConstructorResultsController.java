@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.ConstructorResults;
+import com.f1.records.pojos.ConstructorResult;
 import com.f1.records.services.constructorResults.ConstructorResultsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,12 @@ public class ConstructorResultsController {
     ConstructorResultsServiceImpl constructorResultsService;
 
     @GetMapping(value = "/constructorResults")
-    public ResponseEntity<List<ConstructorResults>> getConstructorResults() {
+    public ResponseEntity<List<ConstructorResult>> getConstructorResults() {
         return new ResponseEntity<>(constructorResultsService.getAllConstructorResults(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/constructorResults/{id}")
-    public ResponseEntity<List<ConstructorResults>> getConstructorResultsById(@PathVariable int id) {
+    public ResponseEntity<List<ConstructorResult>> getConstructorResultsById(@PathVariable int id) {
         return new ResponseEntity<>(constructorResultsService.getAllConstructorResultsById(id), HttpStatus.OK);
     }
 }

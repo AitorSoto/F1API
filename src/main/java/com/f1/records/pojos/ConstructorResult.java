@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "constructorresults")
-public class ConstructorResults {
+public class ConstructorResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "constructor_results_id")
@@ -14,10 +14,10 @@ public class ConstructorResults {
     private float points;
     private String status;
 
-    public ConstructorResults() {
+    public ConstructorResult() {
     }
 
-    public ConstructorResults(int constructorResultId, int raceId, int constructorId, float points, String status) {
+    public ConstructorResult(int constructorResultId, int raceId, int constructorId, float points, String status) {
         this.constructorResultId = constructorResultId;
         this.raceId = raceId;
         this.constructorId = constructorId;

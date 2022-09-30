@@ -1,41 +1,39 @@
 package com.f1.records.pojos;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "constructorstandings")
-public class ConstructorStandings {
+@Table(name = "driverstandings")
+public class DriverStanding {
     @Id
-    private int constructorStandingsId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int driverStandingsId;
     private int raceId;
-    private int constructorId;
+    private int driverId;
     private float points;
     private int position;
     private String positionText;
     private int wins;
 
-    public ConstructorStandings() {
+    public DriverStanding() {
     }
 
-    public ConstructorStandings(int constructorStandingsId, int raceId, int constructorId, float points, int position, String positionText, int wins) {
-        this.constructorStandingsId = constructorStandingsId;
+    public DriverStanding(int driverStandingsId, int raceId, int driverId, float points, int position, String positionText, int wins) {
+        this.driverStandingsId = driverStandingsId;
         this.raceId = raceId;
-        this.constructorId = constructorId;
+        this.driverId = driverId;
         this.points = points;
         this.position = position;
         this.positionText = positionText;
         this.wins = wins;
     }
 
-    public int getConstructorStandingsId() {
-        return constructorStandingsId;
+    public int getDriverStandingsId() {
+        return driverStandingsId;
     }
 
-    public void setConstructorStandingsId(int constructorStandingsId) {
-        this.constructorStandingsId = constructorStandingsId;
+    public void setDriverStandingsId(int driverStandingsId) {
+        this.driverStandingsId = driverStandingsId;
     }
 
     public int getRaceId() {
@@ -46,12 +44,12 @@ public class ConstructorStandings {
         this.raceId = raceId;
     }
 
-    public int getConstructorId() {
-        return constructorId;
+    public int getDriverId() {
+        return driverId;
     }
 
-    public void setConstructorId(int constructorId) {
-        this.constructorId = constructorId;
+    public void setDriverId(int driverId) {
+        this.driverId = driverId;
     }
 
     public float getPoints() {
@@ -88,10 +86,10 @@ public class ConstructorStandings {
 
     @Override
     public String toString() {
-        return "ConstructorStandings{" +
-                "constructorStandingwId=" + constructorStandingsId +
+        return "DriverStanding{" +
+                "driverStandingsId=" + driverStandingsId +
                 ", raceId=" + raceId +
-                ", constructorId=" + constructorId +
+                ", driverId=" + driverId +
                 ", points=" + points +
                 ", position=" + position +
                 ", positionText='" + positionText + '\'' +
