@@ -1,6 +1,6 @@
 package com.f1.records.services.status;
 
-import com.f1.records.pojos.Status;
+import com.f1.records.pojos.DTOs.Status;
 
 import java.util.List;
 

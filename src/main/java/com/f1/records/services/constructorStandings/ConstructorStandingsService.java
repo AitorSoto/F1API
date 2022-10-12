@@ -1,6 +1,6 @@
 package com.f1.records.services.constructorStandings;
 
-import com.f1.records.pojos.ConstructorStanding;
+import com.f1.records.pojos.DTOs.ConstructorStanding;
 
 import java.util.List;
 

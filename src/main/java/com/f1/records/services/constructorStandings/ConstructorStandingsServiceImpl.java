@@ -1,6 +1,6 @@
 package com.f1.records.services.constructorStandings;
 
-import com.f1.records.pojos.ConstructorStanding;
+import com.f1.records.pojos.DTOs.ConstructorStanding;
 import com.f1.records.repositorys.ConstructorsStandingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

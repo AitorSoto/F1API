@@ -1,6 +1,6 @@
 package com.f1.records.services.driver;
 
-import com.f1.records.pojos.Driver;
+import com.f1.records.pojos.DTOs.Driver;
 
 import java.util.List;
 

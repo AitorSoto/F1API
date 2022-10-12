@@ -1,6 +1,6 @@
 package com.f1.records.services.lapTime;
 
-import com.f1.records.pojos.LapTime;
+import com.f1.records.pojos.DTOs.LapTime;
 
 import java.util.List;
 

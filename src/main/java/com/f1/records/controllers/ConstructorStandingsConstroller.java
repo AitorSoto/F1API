@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.ConstructorStanding;
+import com.f1.records.pojos.DTOs.ConstructorStanding;
 import com.f1.records.services.constructorStandings.ConstructorStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

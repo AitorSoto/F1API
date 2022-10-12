@@ -1,7 +1,8 @@
-package com.f1.records.pojos;
+package com.f1.records.pojos.DTOs;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "laptimes")
@@ -19,17 +20,25 @@ public class LapTime implements Serializable {
     private int position;
     private String time;
     private int milliseconds;
+    @OneToOne
+    @JoinColumn(name = "race_id", insertable=false, updatable=false)
+    private Race race;
+    @OneToOne
+    @JoinColumn(name = "driver_id", insertable=false, updatable=false)
+    private Driver driver;
 
     public LapTime() {
     }
 
-    public LapTime(int raceId, int driverId, int lap, int position, String time, int milliseconds) {
+    public LapTime(int raceId, int driverId, int lap, int position, String time, int milliseconds, Race race, Driver driver) {
         this.raceId = raceId;
         this.driverId = driverId;
         this.lap = lap;
         this.position = position;
         this.time = time;
         this.milliseconds = milliseconds;
+        this.race = race;
+        this.driver = driver;
     }
 
     public int getRaceId() {
@@ -80,15 +89,46 @@ public class LapTime implements Serializable {
         this.milliseconds = milliseconds;
     }
 
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LapTime lapTime = (LapTime) o;
+        return raceId == lapTime.raceId && driverId == lapTime.driverId && lap == lapTime.lap && position == lapTime.position && milliseconds == lapTime.milliseconds && time.equals(lapTime.time) && race.equals(lapTime.race) && driver.equals(lapTime.driver);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(raceId, driverId, lap, position, time, milliseconds, race, driver);
+    }
+
     @Override
     public String toString() {
-        return "laptime{" +
+        return "LapTime{" +
                 "raceId=" + raceId +
                 ", driverId=" + driverId +
                 ", lap=" + lap +
-                ", position='" + position + '\'' +
-                ", time=" + time +
+                ", position=" + position +
+                ", time='" + time + '\'' +
                 ", milliseconds=" + milliseconds +
+                ", race=" + race +
+                ", driver=" + driver +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DriverStanding;
+import com.f1.records.pojos.DTOs.DriverStanding;
 import com.f1.records.services.driverStandingsService.DriverStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

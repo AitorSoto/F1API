@@ -1,4 +1,4 @@
-package com.f1.records.pojos;
+package com.f1.records.pojos.DTOs;
 
 import javax.persistence.*;
 
@@ -8,17 +8,25 @@ public class DriverStanding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverStandingsId;
+    @Column(name = "race_id")
     private int raceId;
+    @Column(name = "driver_id")
     private int driverId;
     private float points;
     private int position;
     private String positionText;
     private int wins;
+    @OneToOne
+    @JoinColumn(name = "driver_id", insertable=false, updatable=false)
+    private Driver driver;
+    @OneToOne
+    @JoinColumn(name = "race_id", insertable=false, updatable=false)
+    private Race race;
 
     public DriverStanding() {
     }
 
-    public DriverStanding(int driverStandingsId, int raceId, int driverId, float points, int position, String positionText, int wins) {
+    public DriverStanding(int driverStandingsId, int raceId, int driverId, float points, int position, String positionText, int wins, Race race, Driver driver) {
         this.driverStandingsId = driverStandingsId;
         this.raceId = raceId;
         this.driverId = driverId;
@@ -26,6 +34,8 @@ public class DriverStanding {
         this.position = position;
         this.positionText = positionText;
         this.wins = wins;
+        this.race = race;
+        this.driver = driver;
     }
 
     public int getDriverStandingsId() {
@@ -84,6 +94,22 @@ public class DriverStanding {
         this.wins = wins;
     }
 
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
     @Override
     public String toString() {
         return "DriverStanding{" +
@@ -94,6 +120,8 @@ public class DriverStanding {
                 ", position=" + position +
                 ", positionText='" + positionText + '\'' +
                 ", wins=" + wins +
+                ", race=" + race +
+                ", driver=" + driver +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.f1.records.services.constructors;
 
-import com.f1.records.pojos.Constructor;
+import com.f1.records.pojos.DTOs.Constructor;
 
 import java.util.List;
 

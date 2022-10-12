@@ -1,6 +1,6 @@
 package com.f1.records.services.driver;
 
-import com.f1.records.pojos.Driver;
+import com.f1.records.pojos.DTOs.Driver;
 import com.f1.records.repositorys.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

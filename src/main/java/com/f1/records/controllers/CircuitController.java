@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.Circuit;
+import com.f1.records.pojos.DTOs.Circuit;
 import com.f1.records.services.circuit.CircuitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

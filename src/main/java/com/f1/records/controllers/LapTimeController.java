@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.LapTime;
+import com.f1.records.pojos.DTOs.LapTime;
 import com.f1.records.services.lapTime.LapTimeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

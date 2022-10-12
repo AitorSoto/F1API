@@ -1,6 +1,6 @@
 package com.f1.records.repositorys;
 
-import com.f1.records.pojos.Constructor;
+import com.f1.records.pojos.DTOs.Constructor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

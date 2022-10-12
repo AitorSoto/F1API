@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.Constructor;
+import com.f1.records.pojos.DTOs.Constructor;
 import com.f1.records.services.constructors.ConstructorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

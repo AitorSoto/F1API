@@ -1,4 +1,4 @@
-package com.f1.records.pojos;
+package com.f1.records.pojos.DTOs;
 
 import javax.persistence.*;
 
@@ -64,9 +64,10 @@ public class Constructor {
         this.url = url;
     }
 
+
     @Override
     public String toString() {
-        return "Constructors{" +
+        return "Constructor{" +
                 "constructorId=" + constructorId +
                 ", constructorRef='" + constructorRef + '\'' +
                 ", name='" + name + '\'' +

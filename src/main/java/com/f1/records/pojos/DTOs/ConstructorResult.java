@@ -1,4 +1,4 @@
-package com.f1.records.pojos;
+package com.f1.records.pojos.DTOs;
 
 import javax.persistence.*;
 

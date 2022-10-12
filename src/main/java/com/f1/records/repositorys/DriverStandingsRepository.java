@@ -1,6 +1,6 @@
 package com.f1.records.repositorys;
 
-import com.f1.records.pojos.DriverStanding;
+import com.f1.records.pojos.DTOs.DriverStanding;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

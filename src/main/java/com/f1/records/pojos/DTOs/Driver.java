@@ -1,4 +1,4 @@
-package com.f1.records.pojos;
+package com.f1.records.pojos.DTOs;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.Date;
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "driver_id")
     private int driverId;
     private String driverRef;
     private int number;

@@ -1,6 +1,6 @@
 package com.f1.records.services.driverStandingsService;
 
-import com.f1.records.pojos.DriverStanding;
+import com.f1.records.pojos.DTOs.DriverStanding;
 
 import java.util.List;
 
