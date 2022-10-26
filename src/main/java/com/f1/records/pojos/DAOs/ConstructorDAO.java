@@ -1,22 +1,23 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "constructors")
-public class Constructor {
+public class ConstructorDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "constructor_id")
     private int constructorId;
     private String constructorRef;
     private String name;
     private String nationality;
     private String url;
 
-    public Constructor() {
+    public ConstructorDAO() {
     }
 
-    public Constructor(int constructorId, String constructorRef, String name, String nationality, String url) {
+    public ConstructorDAO(int constructorId, String constructorRef, String name, String nationality, String url) {
         this.constructorId = constructorId;
         this.constructorRef = constructorRef;
         this.name = name;

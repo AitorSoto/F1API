@@ -1,10 +1,11 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "constructorresults")
-public class ConstructorResult {
+public class ConstructorResultDAO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "constructor_results_id")
@@ -13,16 +14,24 @@ public class ConstructorResult {
     private int constructorId;
     private float points;
     private String status;
+    @OneToOne
+    @JoinColumn(name = "raceId", referencedColumnName = "race_id", insertable=false, updatable=false)
+    private RaceDAO race;
+    @OneToOne
+    @JoinColumn(name = "constructorId", referencedColumnName = "constructor_id", insertable=false, updatable=false)
+    private ConstructorDAO constructor;
 
-    public ConstructorResult() {
+    public ConstructorResultDAO() {
     }
 
-    public ConstructorResult(int constructorResultId, int raceId, int constructorId, float points, String status) {
+    public ConstructorResultDAO(int constructorResultId, int raceId, int constructorId, float points, String status, RaceDAO race, ConstructorDAO constructor) {
         this.constructorResultId = constructorResultId;
         this.raceId = raceId;
         this.constructorId = constructorId;
         this.points = points;
         this.status = status;
+        this.race = race;
+        this.constructor = constructor;
     }
 
     public int getConstructorResultId() {
@@ -65,14 +74,32 @@ public class ConstructorResult {
         this.status = status;
     }
 
+    public RaceDAO getRace() {
+        return race;
+    }
+
+    public void setRace(RaceDAO race) {
+        this.race = race;
+    }
+
+    public ConstructorDAO getConstructor() {
+        return constructor;
+    }
+
+    public void setConstructor(ConstructorDAO constructor) {
+        this.constructor = constructor;
+    }
+
     @Override
     public String toString() {
-        return "ConstructorResults{" +
+        return "ConstructorResultDTO{" +
                 "constructorResultId=" + constructorResultId +
                 ", raceId=" + raceId +
                 ", constructorId=" + constructorId +
                 ", points=" + points +
                 ", status='" + status + '\'' +
+                ", race=" + race +
+                ", constructor=" + constructor +
                 '}';
     }
 }

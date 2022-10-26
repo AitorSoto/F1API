@@ -1,10 +1,10 @@
 package com.f1.records.services.constructors;
 
-import com.f1.records.pojos.DTOs.Constructor;
+import com.f1.records.pojos.DAOs.ConstructorDAO;
 
 import java.util.List;
 
 public interface ConstructorService {
-    List<Constructor> findAllConstrucotors();
-    List<Constructor> findConstructorById(int idConstructor);
+    List<ConstructorDAO> findAllConstrucotors();
+    List<ConstructorDAO> findConstructorById(int idConstructor);
 }

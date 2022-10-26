@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DTOs.LapTime;
+import com.f1.records.pojos.DAOs.LapTimeDAO;
 import com.f1.records.services.lapTime.LapTimeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,30 +18,30 @@ public class LapTimeController {
     LapTimeServiceImpl lapTimeService;
 
     @GetMapping(value = "/laptimes")
-    public ResponseEntity<List<LapTime>> findAllLaptimes(   @RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<LapTimeDAO>> findAllLaptimes(@RequestParam(defaultValue = "0") Integer pageNo,
                                                             @RequestParam(defaultValue = "10") Integer pageSize,
                                                             @RequestParam(required = false) String sortBy) {
-        List<LapTime> lapTimes = null;
+        List<LapTimeDAO> lapTimeDAOS = null;
         if(sortBy != null)
-            lapTimes = lapTimeService.findAllLapTimes(pageNo, pageSize, sortBy);
+            lapTimeDAOS = lapTimeService.findAllLapTimes(pageNo, pageSize, sortBy);
         else
-            lapTimes = lapTimeService.findAllLapTimes(pageNo, pageSize);
+            lapTimeDAOS = lapTimeService.findAllLapTimes(pageNo, pageSize);
 
-        return new ResponseEntity<>(lapTimes, HttpStatus.OK);
+        return new ResponseEntity<>(lapTimeDAOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/laptimesById/{driverId}/{raceId}")
-    public ResponseEntity<List<LapTime>> findByDriverIdAndRaceId(   @PathVariable() int driverId,
+    public ResponseEntity<List<LapTimeDAO>> findByDriverIdAndRaceId(@PathVariable() int driverId,
                                                                     @PathVariable() int raceId,
                                                                     @RequestParam(defaultValue = "0") Integer pageNo,
                                                                     @RequestParam(defaultValue = "10") Integer pageSize,
                                                                     @RequestParam(required = false) String sortBy) {
-        List<LapTime> lapTimes = null;
+        List<LapTimeDAO> lapTimeDAOS = null;
         if(sortBy != null)
-            lapTimes = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize, sortBy);
+            lapTimeDAOS = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize, sortBy);
         else
-            lapTimes = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize);
+            lapTimeDAOS = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize);
 
-        return new ResponseEntity<>(lapTimes, HttpStatus.OK);
+        return new ResponseEntity<>(lapTimeDAOS, HttpStatus.OK);
     }
 }

@@ -1,10 +1,10 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "qualifying")
-public class Qualifying {
+public class QualifyingDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "qualify_id")
@@ -22,18 +22,18 @@ public class Qualifying {
     private String q3;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
-    private Driver driver;
+    private DriverDAO driverDAO;
     @OneToOne
     @JoinColumn(name = "constructor_id", insertable=false, updatable=false)
-    private Constructor constructor;
+    private ConstructorDAO constructorDAO;
 
-    public Qualifying() {
+    public QualifyingDAO() {
     }
 
-    public Qualifying(int qualifyId, int raceId, int driverId, int constructorId, int number, int position, String q1, String q2, String q3, Race race, Driver driver, Constructor constructor) {
+    public QualifyingDAO(int qualifyId, int raceId, int driverId, int constructorId, int number, int position, String q1, String q2, String q3, RaceDAO raceDAO, DriverDAO driverDAO, ConstructorDAO constructorDAO) {
         this.qualifyId = qualifyId;
         this.raceId = raceId;
         this.driverId = driverId;
@@ -43,9 +43,9 @@ public class Qualifying {
         this.q1 = q1;
         this.q2 = q2;
         this.q3 = q3;
-        this.race = race;
-        this.driver = driver;
-        this.constructor = constructor;
+        this.raceDAO = raceDAO;
+        this.driverDAO = driverDAO;
+        this.constructorDAO = constructorDAO;
     }
 
     public int getQualifyId() {
@@ -120,28 +120,28 @@ public class Qualifying {
         this.q3 = q3;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public DriverDAO getDriver() {
+        return driverDAO;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriver(DriverDAO driverDAO) {
+        this.driverDAO = driverDAO;
     }
 
-    public Constructor getConstructor() {
-        return constructor;
+    public ConstructorDAO getConstructor() {
+        return constructorDAO;
     }
 
-    public void setConstructor(Constructor constructor) {
-        this.constructor = constructor;
+    public void setConstructor(ConstructorDAO constructorDAO) {
+        this.constructorDAO = constructorDAO;
     }
 
     @Override
@@ -156,9 +156,9 @@ public class Qualifying {
                 ", q1='" + q1 + '\'' +
                 ", q2='" + q2 + '\'' +
                 ", q3='" + q3 + '\'' +
-                ", race=" + race +
-                ", driver=" + driver +
-                ", constructor=" + constructor +
+                ", race=" + raceDAO +
+                ", driver=" + driverDAO +
+                ", constructor=" + constructorDAO +
                 '}';
     }
 }

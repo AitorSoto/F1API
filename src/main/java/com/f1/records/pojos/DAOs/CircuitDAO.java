@@ -1,10 +1,10 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="circuits")
-public class Circuit {
+public class CircuitDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int circuitId;
@@ -17,11 +17,11 @@ public class Circuit {
     private int altitude;
     private String url;
 
-    public Circuit() {
+    public CircuitDAO() {
     }
 
-    public Circuit(int circuitId, String circuitRef, String name, String location,
-                   String country, float latitude, float longitude, int altitude, String url) {
+    public CircuitDAO(int circuitId, String circuitRef, String name, String location,
+                      String country, float latitude, float longitude, int altitude, String url) {
         this.circuitId = circuitId;
         this.circuitRef = circuitRef;
         this.name = name;

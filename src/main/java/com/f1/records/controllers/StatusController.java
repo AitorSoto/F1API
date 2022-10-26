@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DTOs.Status;
+import com.f1.records.pojos.DAOs.StatusDAO;
 import com.f1.records.services.status.StatusServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,12 @@ public class StatusController {
     StatusServiceImpl statusService;
 
     @GetMapping(value = "/statuses")
-    public ResponseEntity<List<Status>> getStatuses() {
+    public ResponseEntity<List<StatusDAO>> getStatuses() {
         return new ResponseEntity<>(statusService.getAllStatuses(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/status/{id}")
-    public ResponseEntity<Status> getStatusById(@PathVariable int id) {
+    public ResponseEntity<StatusDAO> getStatusById(@PathVariable int id) {
         return new ResponseEntity<>(statusService.getById(id), HttpStatus.OK);
     }
 }

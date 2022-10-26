@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DTOs.Driver;
+import com.f1.records.pojos.DAOs.DriverDAO;
 import com.f1.records.services.driver.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,21 +18,21 @@ public class DriverController {
     DriverServiceImpl driverService;
 
     @GetMapping(value = "/drivers")
-    public ResponseEntity<List<Driver>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                         @RequestParam(defaultValue = "10") Integer pageSize,
-                                                         @RequestParam(required = false) String sortBy) {
-        List<Driver> drivers = null;
+    public ResponseEntity<List<DriverDAO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                          @RequestParam(defaultValue = "10") Integer pageSize,
+                                                          @RequestParam(required = false) String sortBy) {
+        List<DriverDAO> driverDAOS = null;
         if(sortBy != null)
-            drivers = driverService.findAllDrivers(pageNo, pageSize, sortBy);
+            driverDAOS = driverService.findAllDrivers(pageNo, pageSize, sortBy);
         else
-            drivers = driverService.findAllDrivers(pageNo, pageSize);
+            driverDAOS = driverService.findAllDrivers(pageNo, pageSize);
 
-        return new ResponseEntity<>(drivers, HttpStatus.OK);
+        return new ResponseEntity<>(driverDAOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/drivers/{surname}")
-    public ResponseEntity<Driver> findDriverBySurname(@PathVariable String surname) {
-        Driver driver = driverService.findDriverBySurname(surname);
-        return new ResponseEntity<>(driver, HttpStatus.OK);
+    public ResponseEntity<DriverDAO> findDriverBySurname(@PathVariable String surname) {
+        DriverDAO driverDAO = driverService.findDriverBySurname(surname);
+        return new ResponseEntity<>(driverDAO, HttpStatus.OK);
     }
 }

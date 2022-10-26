@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DTOs.Circuit;
+import com.f1.records.pojos.DAOs.CircuitDAO;
 import com.f1.records.services.circuit.CircuitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,19 @@ public class CircuitController {
     CircuitServiceImpl circuitService;
 
     @GetMapping(value = "/circuits")
-    public ResponseEntity<List<Circuit>> getAllCircuits() {
-        return new ResponseEntity<>(circuitService.getAllCircuits(), HttpStatus.OK);
+    public ResponseEntity<List<CircuitDAO>> getAllCircuits(@PathVariable() int pageNo,
+                                                           @PathVariable() int pageSize,
+                                                           @PathVariable(required = false) String sortBy) {
+        //Pageable
+        if(sortBy != null)
+        {
+
+        }
+        return new ResponseEntity<>(circuitService.getAllCircuits(10, 0), HttpStatus.OK);
     }
 
     @GetMapping(value = "/circuit/{id}")
-    public ResponseEntity<Circuit> getCircuitById(@PathVariable int id) {
+    public ResponseEntity<CircuitDAO> getCircuitById(@PathVariable int id) {
         return new ResponseEntity<>(circuitService.getCircuitById(id), HttpStatus.OK);
     }
 }

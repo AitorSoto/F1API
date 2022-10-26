@@ -1,6 +1,6 @@
 package com.f1.records.services.status;
 
-import com.f1.records.pojos.DTOs.Status;
+import com.f1.records.pojos.DAOs.StatusDAO;
 import com.f1.records.repositorys.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,17 @@ public class StatusServiceImpl implements StatusService {
     StatusRepository statusRepository;
 
     @Override
-    public List<Status> getAllStatuses() {
-        Iterable<Status> iterator = statusRepository.findAll();
-        List<Status> statuses = new ArrayList<>();
-        iterator.forEach(statuses::add);
-        return statuses;
+    public List<StatusDAO> getAllStatuses() {
+        Iterable<StatusDAO> iterator = statusRepository.findAll();
+        List<StatusDAO> statusDAOS = new ArrayList<>();
+        iterator.forEach(statusDAOS::add);
+        return statusDAOS;
     }
 
     @Override
-    public Status getById(int id) {
-        Optional<Status> statusOptional = statusRepository.findById(id);
-        Status status = statusOptional.get();
-        return status;
+    public StatusDAO getById(int id) {
+        Optional<StatusDAO> statusOptional = statusRepository.findById(id);
+        StatusDAO statusDAO = statusOptional.get();
+        return statusDAO;
     }
 }

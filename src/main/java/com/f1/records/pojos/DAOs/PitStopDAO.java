@@ -1,4 +1,4 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -7,8 +7,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "pitstops")
-@IdClass(PitStop.class)
-public class PitStop implements Serializable {
+@IdClass(PitStopDAO.class)
+public class PitStopDAO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "race_id")
@@ -24,15 +24,15 @@ public class PitStop implements Serializable {
     private int milliseconds;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
-    private Driver driver;
+    private DriverDAO driverDAO;
 
-    public PitStop() {
+    public PitStopDAO() {
     }
 
-    public PitStop(int raceId, int driverId, int stop, int lap, Time time, String duration, int milliseconds, Race race, Driver driver) {
+    public PitStopDAO(int raceId, int driverId, int stop, int lap, Time time, String duration, int milliseconds, RaceDAO raceDAO, DriverDAO driverDAO) {
         this.raceId = raceId;
         this.driverId = driverId;
         this.stop = stop;
@@ -40,8 +40,8 @@ public class PitStop implements Serializable {
         this.time = time;
         this.duration = duration;
         this.milliseconds = milliseconds;
-        this.race = race;
-        this.driver = driver;
+        this.raceDAO = raceDAO;
+        this.driverDAO = driverDAO;
     }
 
     public int getRaceId() {
@@ -100,33 +100,33 @@ public class PitStop implements Serializable {
         this.milliseconds = milliseconds;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public DriverDAO getDriver() {
+        return driverDAO;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriver(DriverDAO driverDAO) {
+        this.driverDAO = driverDAO;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PitStop pitStop = (PitStop) o;
-        return raceId == pitStop.raceId && driverId == pitStop.driverId && stop == pitStop.stop && lap == pitStop.lap && milliseconds == pitStop.milliseconds && time.equals(pitStop.time) && duration.equals(pitStop.duration) && race.equals(pitStop.race) && driver.equals(pitStop.driver);
+        PitStopDAO pitStopDAO = (PitStopDAO) o;
+        return raceId == pitStopDAO.raceId && driverId == pitStopDAO.driverId && stop == pitStopDAO.stop && lap == pitStopDAO.lap && milliseconds == pitStopDAO.milliseconds && time.equals(pitStopDAO.time) && duration.equals(pitStopDAO.duration) && raceDAO.equals(pitStopDAO.raceDAO) && driverDAO.equals(pitStopDAO.driverDAO);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(raceId, driverId, stop, lap, time, duration, milliseconds, race, driver);
+        return Objects.hash(raceId, driverId, stop, lap, time, duration, milliseconds, raceDAO, driverDAO);
     }
 
     @Override
@@ -139,8 +139,8 @@ public class PitStop implements Serializable {
                 ", time=" + time +
                 ", duration='" + duration + '\'' +
                 ", milliseconds=" + milliseconds +
-                ", race=" + race +
-                ", driver=" + driver +
+                ", race=" + raceDAO +
+                ", driver=" + driverDAO +
                 '}';
     }
 }

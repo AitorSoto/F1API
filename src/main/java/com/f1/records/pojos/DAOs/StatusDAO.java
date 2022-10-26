@@ -1,21 +1,21 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "status")
-public class Status {
+public class StatusDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statusId;
     private String status;
 
-    public Status(int statusId, String status) {
+    public StatusDAO(int statusId, String status) {
         this.statusId = statusId;
         this.status = status;
     }
 
-    public Status() {
+    public StatusDAO() {
     }
 
     public int getStatusId() {

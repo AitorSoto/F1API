@@ -1,4 +1,4 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "races")
-public class Race {
+public class RaceDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "race_id")
@@ -31,12 +31,12 @@ public class Race {
 	private Time sprintTime;
     @OneToOne
     @JoinColumn(name = "circuit_id", insertable = false, updatable = false)
-    private Circuit circuit;
+    private CircuitDAO circuitDAO;
 
-    public Race() {
+    public RaceDAO() {
     }
 
-    public Race(int raceId, int year, int round, int circuitId, String name, Date date, Time time, String url, Date fp1Date, Time fp1Time, Date fp2Date, Time fp2Time, Date fp3Date, Time fp3Time, Date qualiDate, Time qualiTime, Date sprintDate, Time sprintTime, Circuit circuit) {
+    public RaceDAO(int raceId, int year, int round, int circuitId, String name, Date date, Time time, String url, Date fp1Date, Time fp1Time, Date fp2Date, Time fp2Time, Date fp3Date, Time fp3Time, Date qualiDate, Time qualiTime, Date sprintDate, Time sprintTime, CircuitDAO circuitDAO) {
         this.raceId = raceId;
         this.year = year;
         this.round = round;
@@ -55,7 +55,7 @@ public class Race {
         this.qualiTime = qualiTime;
         this.sprintDate = sprintDate;
         this.sprintTime = sprintTime;
-        this.circuit = circuit;
+        this.circuitDAO = circuitDAO;
     }
 
     public int getRaceId() {
@@ -202,12 +202,12 @@ public class Race {
         this.sprintTime = sprintTime;
     }
 
-    public Circuit getCircuit() {
-        return circuit;
+    public CircuitDAO getCircuit() {
+        return circuitDAO;
     }
 
-    public void setCircuit(Circuit circuit) {
-        this.circuit = circuit;
+    public void setCircuit(CircuitDAO circuitDAO) {
+        this.circuitDAO = circuitDAO;
     }
 
     @Override
@@ -231,7 +231,7 @@ public class Race {
                 ", qualiTime=" + qualiTime +
                 ", sprintDate=" + sprintDate +
                 ", sprintTime=" + sprintTime +
-                ", circuit=" + circuit +
+                ", circuit=" + circuitDAO +
                 '}';
     }
 }

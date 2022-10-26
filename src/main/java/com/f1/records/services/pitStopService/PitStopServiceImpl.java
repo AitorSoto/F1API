@@ -1,6 +1,6 @@
 package com.f1.records.services.pitStopService;
 
-import com.f1.records.pojos.DTOs.PitStop;
+import com.f1.records.pojos.DAOs.PitStopDAO;
 import com.f1.records.repositorys.PitStopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,49 +17,49 @@ public class PitStopServiceImpl implements PitStopService {
     PitStopRepository pitStopRepository;
 
     @Override
-    public List<PitStop> findAllPitStops(int pageNo, int pageSize) {
+    public List<PitStopDAO> findAllPitStops(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<PitStop> pitStops = pitStopRepository.findAll(pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findAll(pageable);
 
         return pitStops.getContent();
     }
 
     @Override
-    public List<PitStop> findAllPitStops(int pageNo, int pageSize, String sortBy) {
+    public List<PitStopDAO> findAllPitStops(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<PitStop> pitStops = pitStopRepository.findAll(pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findAll(pageable);
 
         return pitStops.getContent();
     }
 
     @Override
-    public List<PitStop> findByDriverId(int driverId, int pageNo, int pageSize) {
+    public List<PitStopDAO> findByDriverId(int driverId, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<PitStop> pitStops = pitStopRepository.findPitStopsByDriverId(driverId, pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverId(driverId, pageable);
 
         return pitStops.getContent();
     }
 
     @Override
-    public List<PitStop> findByDriverId(int driverId, int pageNo, int pageSize, String sortBy) {
+    public List<PitStopDAO> findByDriverId(int driverId, int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<PitStop> pitStops = pitStopRepository.findPitStopsByDriverId(driverId, pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverId(driverId, pageable);
 
         return pitStops.getContent();
     }
 
     @Override
-    public List<PitStop> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) {
+    public List<PitStopDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<PitStop> pitStops = pitStopRepository.findPitStopsByDriverIdAndRaceId(driverId, raceId, pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverIdAndRaceId(driverId, raceId, pageable);
 
         return pitStops.getContent();
     }
 
     @Override
-    public List<PitStop> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy) {
+    public List<PitStopDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<PitStop> pitStops = pitStopRepository.findPitStopsByDriverIdAndRaceId(driverId, raceId, pageable);
+        Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverIdAndRaceId(driverId, raceId, pageable);
 
         return pitStops.getContent();
     }

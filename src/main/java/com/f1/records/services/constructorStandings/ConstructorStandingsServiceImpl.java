@@ -1,6 +1,6 @@
 package com.f1.records.services.constructorStandings;
 
-import com.f1.records.pojos.DTOs.ConstructorStanding;
+import com.f1.records.pojos.DAOs.ConstructorStandingDAO;
 import com.f1.records.repositorys.ConstructorsStandingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,20 +15,20 @@ public class ConstructorStandingsServiceImpl implements ConstructorStandingsServ
     ConstructorsStandingsRepository constructorsStandingsRepository;
 
     @Override
-    public List<ConstructorStanding> findAllConstructorStandings() {
-        Iterable<ConstructorStanding> constructorStandings = constructorsStandingsRepository.findAll();
-        List<ConstructorStanding> constructorStandingList = new ArrayList<>();
-        constructorStandings.forEach(constructorStandingList::add);
-        return constructorStandingList;
+    public List<ConstructorStandingDAO> findAllConstructorStandings() {
+        Iterable<ConstructorStandingDAO> constructorStandings = constructorsStandingsRepository.findAll();
+        List<ConstructorStandingDAO> constructorStandingDAOList = new ArrayList<>();
+        constructorStandings.forEach(constructorStandingDAOList::add);
+        return constructorStandingDAOList;
     }
 
     @Override
-    public List<ConstructorStanding> findConstructorStandingsById(int id) {
-        Iterable<ConstructorStanding> constructorStandings = constructorsStandingsRepository.findAll();
-        List<ConstructorStanding> constructorStandingList = new ArrayList<>();
-        constructorStandings.forEach(constructorStandingList::add);
-        List<ConstructorStanding> constructorFiltered =
-                constructorStandingList.stream()
+    public List<ConstructorStandingDAO> findConstructorStandingsById(int id) {
+        Iterable<ConstructorStandingDAO> constructorStandings = constructorsStandingsRepository.findAll();
+        List<ConstructorStandingDAO> constructorStandingDAOList = new ArrayList<>();
+        constructorStandings.forEach(constructorStandingDAOList::add);
+        List<ConstructorStandingDAO> constructorFiltered =
+                constructorStandingDAOList.stream()
                 .filter(constructor -> constructor.getConstructorId() == id)
                 .collect(Collectors.toList());
         return constructorFiltered;

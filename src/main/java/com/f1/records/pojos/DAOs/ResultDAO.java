@@ -1,10 +1,10 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "results")
-public class Result {
+public class ResultDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "result_id")
@@ -32,21 +32,21 @@ public class Result {
     private int statusId;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
-    private Driver driver;
+    private DriverDAO driverDAO;
     @OneToOne
     @JoinColumn(name = "constructor_id", insertable=false, updatable=false)
-    private Constructor constructor;
+    private ConstructorDAO constructorDAO;
     @OneToOne
     @JoinColumn(name = "status_id", insertable=false, updatable=false)
-    private Status status;
+    private StatusDAO statusDAO;
 
-    public Result() {
+    public ResultDAO() {
     }
 
-    public Result(int resultId, int raceId, int driverId, int constructorId, int number, int grid, int position, String positionText, int positionOrder, float points, int laps, String time, int milliseconds, int fastestLap, int rank, String fastestLapTime, String fastestLapSpeed, int statusId, Race race, Driver driver, Constructor constructor, Status status) {
+    public ResultDAO(int resultId, int raceId, int driverId, int constructorId, int number, int grid, int position, String positionText, int positionOrder, float points, int laps, String time, int milliseconds, int fastestLap, int rank, String fastestLapTime, String fastestLapSpeed, int statusId, RaceDAO raceDAO, DriverDAO driverDAO, ConstructorDAO constructorDAO, StatusDAO statusDAO) {
         this.resultId = resultId;
         this.raceId = raceId;
         this.driverId = driverId;
@@ -65,10 +65,10 @@ public class Result {
         this.fastestLapTime = fastestLapTime;
         this.fastestLapSpeed = fastestLapSpeed;
         this.statusId = statusId;
-        this.race = race;
-        this.driver = driver;
-        this.constructor = constructor;
-        this.status = status;
+        this.raceDAO = raceDAO;
+        this.driverDAO = driverDAO;
+        this.constructorDAO = constructorDAO;
+        this.statusDAO = statusDAO;
     }
 
     public int getResultId() {
@@ -215,36 +215,36 @@ public class Result {
         this.statusId = statusId;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public DriverDAO getDriver() {
+        return driverDAO;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriver(DriverDAO driverDAO) {
+        this.driverDAO = driverDAO;
     }
 
-    public Constructor getConstructor() {
-        return constructor;
+    public ConstructorDAO getConstructor() {
+        return constructorDAO;
     }
 
-    public void setConstructor(Constructor constructor) {
-        this.constructor = constructor;
+    public void setConstructor(ConstructorDAO constructorDAO) {
+        this.constructorDAO = constructorDAO;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusDAO getStatus() {
+        return statusDAO;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusDAO statusDAO) {
+        this.statusDAO = statusDAO;
     }
 
     @Override
@@ -268,10 +268,10 @@ public class Result {
                 ", fastestLapTime='" + fastestLapTime + '\'' +
                 ", fastestLapSpeed='" + fastestLapSpeed + '\'' +
                 ", statusId=" + statusId +
-                ", race=" + race +
-                ", driver=" + driver +
-                ", constructor=" + constructor +
-                ", status=" + status +
+                ", race=" + raceDAO +
+                ", driver=" + driverDAO +
+                ", constructor=" + constructorDAO +
+                ", status=" + statusDAO +
                 '}';
     }
 }

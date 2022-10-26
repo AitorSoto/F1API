@@ -1,7 +1,8 @@
 package com.f1.records.repositorys;
 
-import com.f1.records.pojos.DTOs.Circuit;
-import org.springframework.data.repository.CrudRepository;
+import com.f1.records.pojos.DAOs.CircuitDAO;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CircuitRepository extends CrudRepository<Circuit, Integer> {
+public interface CircuitRepository extends PagingAndSortingRepository<CircuitDAO, Integer> {
+    CircuitDAO getCircuitByName(String circuitName);
 }

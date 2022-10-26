@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DTOs.PitStop;
+import com.f1.records.pojos.DAOs.PitStopDAO;
 import com.f1.records.services.pitStopService.PitStopServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +19,10 @@ public class PitStopController {
     PitStopServiceImpl pitStopService;
 
     @GetMapping(value = "/pitstops", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStop>> findAllPitStops(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                         @RequestParam(defaultValue = "10") Integer pageSize,
-                                                         @RequestParam(required = false) String sortBy) {
-        List<PitStop> lapTimes = null;
+    public ResponseEntity<List<PitStopDAO>> findAllPitStops(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                            @RequestParam(defaultValue = "10") Integer pageSize,
+                                                            @RequestParam(required = false) String sortBy) {
+        List<PitStopDAO> lapTimes = null;
         if(sortBy != null)
             lapTimes = pitStopService.findAllPitStops(pageNo, pageSize, sortBy);
         else
@@ -32,11 +32,11 @@ public class PitStopController {
     }
 
     @GetMapping(value = "/pitstops/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStop>> findAllPitStopsByDriverId( @PathVariable() int driverId,
-                                                                    @RequestParam(defaultValue = "0") Integer pageNo,
-                                                                    @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                    @RequestParam(required = false) String sortBy) {
-        List<PitStop> lapTimes = null;
+    public ResponseEntity<List<PitStopDAO>> findAllPitStopsByDriverId(@PathVariable() int driverId,
+                                                                      @RequestParam(defaultValue = "0") Integer pageNo,
+                                                                      @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                      @RequestParam(required = false) String sortBy) {
+        List<PitStopDAO> lapTimes = null;
         if(sortBy != null)
             lapTimes = pitStopService.findByDriverId(driverId, pageNo, pageSize, sortBy);
         else
@@ -46,12 +46,12 @@ public class PitStopController {
     }
 
     @GetMapping(value = "/pitstops/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStop>> findAllPitStopsByDriverIdAndRaceId(@PathVariable() int driverId,
-                                                                            @PathVariable() int raceId,
-                                                                            @RequestParam(defaultValue = "0") Integer pageNo,
-                                                                            @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                            @RequestParam(required = false) String sortBy) {
-        List<PitStop> lapTimes = null;
+    public ResponseEntity<List<PitStopDAO>> findAllPitStopsByDriverIdAndRaceId(@PathVariable() int driverId,
+                                                                               @PathVariable() int raceId,
+                                                                               @RequestParam(defaultValue = "0") Integer pageNo,
+                                                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                               @RequestParam(required = false) String sortBy) {
+        List<PitStopDAO> lapTimes = null;
         if(sortBy != null)
             lapTimes = pitStopService.findByDriverIdAndRaceId(driverId, raceId,pageNo, pageSize, sortBy);
         else

@@ -1,6 +1,6 @@
 package com.f1.records.services.constructors;
 
-import com.f1.records.pojos.DTOs.Constructor;
+import com.f1.records.pojos.DAOs.ConstructorDAO;
 import com.f1.records.repositorys.ConstructorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,22 +15,22 @@ public class ConstructorServiceImpl implements ConstructorService{
     ConstructorsRepository constructorRepository;
 
     @Override
-    public List<Constructor> findAllConstrucotors() {
-        Iterable<Constructor> optionalResults = constructorRepository.findAll();
-        List<Constructor> constructorResults = new ArrayList<>();
-        optionalResults.forEach(constructorResults::add);
-        return constructorResults;
+    public List<ConstructorDAO> findAllConstrucotors() {
+        Iterable<ConstructorDAO> optionalResults = constructorRepository.findAll();
+        List<ConstructorDAO> constructorDAOResults = new ArrayList<>();
+        optionalResults.forEach(constructorDAOResults::add);
+        return constructorDAOResults;
     }
 
     @Override
-    public List<Constructor> findConstructorById(int idConstructor) {
-        Iterable<Constructor> optionalResults = constructorRepository.findAll();
-        List<Constructor> constructorResults = new ArrayList<>();
-        optionalResults.forEach(constructorResults::add);
-        List<Constructor> filteredConstructorResults =
-                constructorResults.stream()
+    public List<ConstructorDAO> findConstructorById(int idConstructor) {
+        Iterable<ConstructorDAO> optionalResults = constructorRepository.findAll();
+        List<ConstructorDAO> constructorDAOResults = new ArrayList<>();
+        optionalResults.forEach(constructorDAOResults::add);
+        List<ConstructorDAO> filteredConstructorResultDTOS =
+                constructorDAOResults.stream()
                         .filter(constructor -> constructor.getConstructorId() == idConstructor)
                         .collect(Collectors.toList());
-        return filteredConstructorResults;
+        return filteredConstructorResultDTOS;
     }
 }

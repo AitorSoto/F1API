@@ -1,11 +1,11 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "drivers")
-public class Driver {
+public class DriverDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driver_id")
@@ -19,10 +19,10 @@ public class Driver {
     private String nationality;
     private String url;
 
-    public Driver() {
+    public DriverDAO() {
     }
 
-    public Driver(int driverId, String driverRef, int number, String code, String forename, String surname, Date dob, String nationality, String url) {
+    public DriverDAO(int driverId, String driverRef, int number, String code, String forename, String surname, Date dob, String nationality, String url) {
         this.driverId = driverId;
         this.driverRef = driverRef;
         this.number = number;

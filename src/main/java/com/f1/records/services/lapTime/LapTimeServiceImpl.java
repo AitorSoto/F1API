@@ -1,6 +1,6 @@
 package com.f1.records.services.lapTime;
 
-import com.f1.records.pojos.DTOs.LapTime;
+import com.f1.records.pojos.DAOs.LapTimeDAO;
 import com.f1.records.repositorys.LapTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,33 +17,33 @@ public class LapTimeServiceImpl implements LapTimeService{
     LapTimeRepository lapTimeRepository;
 
     @Override
-    public List<LapTime> findAllLapTimes(int pageNo, int pageSize, String sortBy) {
+    public List<LapTimeDAO> findAllLapTimes(int pageNo, int pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<LapTime> lapTimesPageable = lapTimeRepository.findAll(paging);
+        Page<LapTimeDAO> lapTimesPageable = lapTimeRepository.findAll(paging);
 
         return lapTimesPageable.getContent();
     }
 
     @Override
-    public List<LapTime> findAllLapTimes(int pageNo, int pageSize) {
+    public List<LapTimeDAO> findAllLapTimes(int pageNo, int pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
-        Page<LapTime> lapTimesPageable = lapTimeRepository.findAll(paging);
+        Page<LapTimeDAO> lapTimesPageable = lapTimeRepository.findAll(paging);
 
         return lapTimesPageable.getContent();
     }
 
     @Override
-    public List<LapTime> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy) {
+    public List<LapTimeDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<LapTime> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
+        Page<LapTimeDAO> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
 
         return lapTimePage.getContent();
     }
 
     @Override
-    public List<LapTime> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) { // MAAAAAL
+    public List<LapTimeDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize) { // MAAAAAL
         Pageable paging = PageRequest.of(pageNo, pageSize);
-        Page<LapTime> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
+        Page<LapTimeDAO> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
 
         return lapTimePage.getContent();
     }

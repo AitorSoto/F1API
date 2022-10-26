@@ -1,11 +1,11 @@
 package com.f1.records.services.driver;
 
-import com.f1.records.pojos.DTOs.Driver;
+import com.f1.records.pojos.DAOs.DriverDAO;
 
 import java.util.List;
 
 public interface DriverService {
-    List<Driver> findAllDrivers(int pageNo, int pageSize, String sortBy);
-    List<Driver> findAllDrivers(int pageNo, int pageSize);
-    Driver findDriverBySurname(String surname);
+    List<DriverDAO> findAllDrivers(int pageNo, int pageSize, String sortBy);
+    List<DriverDAO> findAllDrivers(int pageNo, int pageSize);
+    DriverDAO findDriverBySurname(String surname);
 }

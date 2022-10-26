@@ -1,10 +1,10 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "driverstandings")
-public class DriverStanding {
+public class DriverStandingDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverStandingsId;
@@ -18,15 +18,15 @@ public class DriverStanding {
     private int wins;
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
-    private Driver driver;
+    private DriverDAO driverDAO;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
 
-    public DriverStanding() {
+    public DriverStandingDAO() {
     }
 
-    public DriverStanding(int driverStandingsId, int raceId, int driverId, float points, int position, String positionText, int wins, Race race, Driver driver) {
+    public DriverStandingDAO(int driverStandingsId, int raceId, int driverId, float points, int position, String positionText, int wins, RaceDAO raceDAO, DriverDAO driverDAO) {
         this.driverStandingsId = driverStandingsId;
         this.raceId = raceId;
         this.driverId = driverId;
@@ -34,8 +34,8 @@ public class DriverStanding {
         this.position = position;
         this.positionText = positionText;
         this.wins = wins;
-        this.race = race;
-        this.driver = driver;
+        this.raceDAO = raceDAO;
+        this.driverDAO = driverDAO;
     }
 
     public int getDriverStandingsId() {
@@ -94,20 +94,20 @@ public class DriverStanding {
         this.wins = wins;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public DriverDAO getDriver() {
+        return driverDAO;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriver(DriverDAO driverDAO) {
+        this.driverDAO = driverDAO;
     }
 
     @Override
@@ -120,8 +120,8 @@ public class DriverStanding {
                 ", position=" + position +
                 ", positionText='" + positionText + '\'' +
                 ", wins=" + wins +
-                ", race=" + race +
-                ", driver=" + driver +
+                ", race=" + raceDAO +
+                ", driver=" + driverDAO +
                 '}';
     }
 }

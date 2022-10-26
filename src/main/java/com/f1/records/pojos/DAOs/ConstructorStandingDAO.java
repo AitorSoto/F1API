@@ -1,10 +1,11 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "constructorstandings")
-public class ConstructorStanding {
+public class ConstructorStandingDAO implements Serializable {
     @Id
     private int constructorStandingsId;
     @Column(name = "race_id")
@@ -17,15 +18,15 @@ public class ConstructorStanding {
     private int wins;
     @OneToOne
     @JoinColumn(name = "constructor_id", insertable=false, updatable=false)
-    private Constructor constructor;
+    private ConstructorDAO constructorDAO;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
 
-    public ConstructorStanding() {
+    public ConstructorStandingDAO() {
     }
 
-    public ConstructorStanding(int constructorStandingsId, int raceId, int constructorId, float points, int position, String positionText, int wins, Constructor constructor, Race race) {
+    public ConstructorStandingDAO(int constructorStandingsId, int raceId, int constructorId, float points, int position, String positionText, int wins, ConstructorDAO constructorDAO, RaceDAO raceDAO) {
         this.constructorStandingsId = constructorStandingsId;
         this.raceId = raceId;
         this.constructorId = constructorId;
@@ -33,8 +34,8 @@ public class ConstructorStanding {
         this.position = position;
         this.positionText = positionText;
         this.wins = wins;
-        this.constructor = constructor;
-        this.race = race;
+        this.constructorDAO = constructorDAO;
+        this.raceDAO = raceDAO;
     }
 
     public int getConstructorStandingsId() {
@@ -93,20 +94,20 @@ public class ConstructorStanding {
         this.wins = wins;
     }
 
-    public Constructor getConstructor() {
-        return constructor;
+    public ConstructorDAO getConstructor() {
+        return constructorDAO;
     }
 
-    public void setConstructor(Constructor constructor) {
-        this.constructor = constructor;
+    public void setConstructor(ConstructorDAO constructorDAO) {
+        this.constructorDAO = constructorDAO;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
     @Override
@@ -119,8 +120,8 @@ public class ConstructorStanding {
                 ", position=" + position +
                 ", positionText='" + positionText + '\'' +
                 ", wins=" + wins +
-                ", constructor=" + constructor +
-                ", race=" + race +
+                ", constructor=" + constructorDAO +
+                ", race=" + raceDAO +
                 '}';
     }
 }

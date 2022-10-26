@@ -1,6 +1,6 @@
 package com.f1.records.services.constructorResults;
 
-import com.f1.records.pojos.DTOs.ConstructorResult;
+import com.f1.records.pojos.DAOs.ConstructorResultDAO;
 import com.f1.records.repositorys.ConstructorResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,22 +15,22 @@ public class ConstructorResultsServiceImpl implements ConstructorResultsService{
     ConstructorResultsRepository constructorRespository;
 
     @Override
-    public List<ConstructorResult> getAllConstructorResults() {
-        Iterable<ConstructorResult> optionalResults = constructorRespository.findAll();
-        List<ConstructorResult> constructorResults = new ArrayList<>();
-        optionalResults.forEach(constructorResults::add);
-        return constructorResults;
+    public List<ConstructorResultDAO> getAllConstructorResults() {
+        Iterable<ConstructorResultDAO> optionalResults = constructorRespository.findAll();
+        List<ConstructorResultDAO> constructorResultDAOS = new ArrayList<>();
+        optionalResults.forEach(constructorResultDAOS::add);
+        return constructorResultDAOS;
     }
 
     @Override
-    public List<ConstructorResult> getAllConstructorResultsById(int idConstructor) {
-        Iterable<ConstructorResult> optionalResults = constructorRespository.findAll();
-        List<ConstructorResult> constructorResults = new ArrayList<>();
-        optionalResults.forEach(constructorResults::add);
-        List<ConstructorResult> filteredConstructorResults =
-                constructorResults.stream()
+    public List<ConstructorResultDAO> getAllConstructorResultsById(int idConstructor) {
+        Iterable<ConstructorResultDAO> optionalResults = constructorRespository.findAll();
+        List<ConstructorResultDAO> constructorResultDAOS = new ArrayList<>();
+        optionalResults.forEach(constructorResultDAOS::add);
+        List<ConstructorResultDAO> filteredConstructorResultDAOS =
+                constructorResultDAOS.stream()
                 .filter(constructor -> constructor.getConstructorId() == idConstructor)
                 .collect(Collectors.toList());
-        return filteredConstructorResults;
+        return filteredConstructorResultDAOS;
     }
 }

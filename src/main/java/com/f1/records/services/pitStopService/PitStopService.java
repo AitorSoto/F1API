@@ -1,14 +1,14 @@
 package com.f1.records.services.pitStopService;
 
-import com.f1.records.pojos.DTOs.PitStop;
+import com.f1.records.pojos.DAOs.PitStopDAO;
 
 import java.util.List;
 
 public interface PitStopService {
-    List<PitStop> findAllPitStops(int pageNo, int pageSize);
-    List<PitStop> findAllPitStops(int pageNo, int pageSize, String sortBy);
-    List<PitStop> findByDriverId(int driverId, int pageNo, int pageSize);
-    List<PitStop> findByDriverId(int driverId, int pageNo, int pageSize, String sortBy);
-    List<PitStop> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize);
-    List<PitStop> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy);
+    List<PitStopDAO> findAllPitStops(int pageNo, int pageSize);
+    List<PitStopDAO> findAllPitStops(int pageNo, int pageSize, String sortBy);
+    List<PitStopDAO> findByDriverId(int driverId, int pageNo, int pageSize);
+    List<PitStopDAO> findByDriverId(int driverId, int pageNo, int pageSize, String sortBy);
+    List<PitStopDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize);
+    List<PitStopDAO> findByDriverIdAndRaceId(int driverId, int raceId, int pageNo, int pageSize, String sortBy);
 }

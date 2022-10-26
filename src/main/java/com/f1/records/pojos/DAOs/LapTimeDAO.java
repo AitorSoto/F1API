@@ -1,4 +1,4 @@
-package com.f1.records.pojos.DTOs;
+package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -6,8 +6,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "laptimes")
-@IdClass(LapTime.class)
-public class LapTime implements Serializable {
+@IdClass(LapTimeDAO.class)
+public class LapTimeDAO implements Serializable {
     @Id
     @Column(name = "race_id")
     private int raceId;
@@ -22,23 +22,23 @@ public class LapTime implements Serializable {
     private int milliseconds;
     @OneToOne
     @JoinColumn(name = "race_id", insertable=false, updatable=false)
-    private Race race;
+    private RaceDAO raceDAO;
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
-    private Driver driver;
+    private DriverDAO driverDAO;
 
-    public LapTime() {
+    public LapTimeDAO() {
     }
 
-    public LapTime(int raceId, int driverId, int lap, int position, String time, int milliseconds, Race race, Driver driver) {
+    public LapTimeDAO(int raceId, int driverId, int lap, int position, String time, int milliseconds, RaceDAO raceDAO, DriverDAO driverDAO) {
         this.raceId = raceId;
         this.driverId = driverId;
         this.lap = lap;
         this.position = position;
         this.time = time;
         this.milliseconds = milliseconds;
-        this.race = race;
-        this.driver = driver;
+        this.raceDAO = raceDAO;
+        this.driverDAO = driverDAO;
     }
 
     public int getRaceId() {
@@ -89,33 +89,33 @@ public class LapTime implements Serializable {
         this.milliseconds = milliseconds;
     }
 
-    public Race getRace() {
-        return race;
+    public RaceDAO getRace() {
+        return raceDAO;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRace(RaceDAO raceDAO) {
+        this.raceDAO = raceDAO;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public DriverDAO getDriver() {
+        return driverDAO;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriver(DriverDAO driverDAO) {
+        this.driverDAO = driverDAO;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LapTime lapTime = (LapTime) o;
-        return raceId == lapTime.raceId && driverId == lapTime.driverId && lap == lapTime.lap && position == lapTime.position && milliseconds == lapTime.milliseconds && time.equals(lapTime.time) && race.equals(lapTime.race) && driver.equals(lapTime.driver);
+        LapTimeDAO lapTimeDAO = (LapTimeDAO) o;
+        return raceId == lapTimeDAO.raceId && driverId == lapTimeDAO.driverId && lap == lapTimeDAO.lap && position == lapTimeDAO.position && milliseconds == lapTimeDAO.milliseconds && time.equals(lapTimeDAO.time) && raceDAO.equals(lapTimeDAO.raceDAO) && driverDAO.equals(lapTimeDAO.driverDAO);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(raceId, driverId, lap, position, time, milliseconds, race, driver);
+        return Objects.hash(raceId, driverId, lap, position, time, milliseconds, raceDAO, driverDAO);
     }
 
     @Override
@@ -127,8 +127,8 @@ public class LapTime implements Serializable {
                 ", position=" + position +
                 ", time='" + time + '\'' +
                 ", milliseconds=" + milliseconds +
-                ", race=" + race +
-                ", driver=" + driver +
+                ", race=" + raceDAO +
+                ", driver=" + driverDAO +
                 '}';
     }
 }

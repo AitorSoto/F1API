@@ -1,6 +1,6 @@
 package com.f1.records.services.driver;
 
-import com.f1.records.pojos.DTOs.Driver;
+import com.f1.records.pojos.DAOs.DriverDAO;
 import com.f1.records.repositorys.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,23 +17,23 @@ public class DriverServiceImpl implements DriverService{
     DriverRepository driverRepository;
 
     @Override
-    public List<Driver> findAllDrivers(int pageNo, int pageSize, String sortBy) {
+    public List<DriverDAO> findAllDrivers(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<Driver> drivers = driverRepository.findAll(pageable);
+        Page<DriverDAO> drivers = driverRepository.findAll(pageable);
 
         return drivers.getContent();
     }
 
     @Override
-    public List<Driver> findAllDrivers(int pageNo, int pageSize) {
+    public List<DriverDAO> findAllDrivers(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Driver> drivers = driverRepository.findAll(pageable);
+        Page<DriverDAO> drivers = driverRepository.findAll(pageable);
 
         return drivers.getContent();
     }
 
     @Override
-    public Driver findDriverBySurname(String surname) {
-        return driverRepository.getDriverBySurname(surname);
+    public DriverDAO findDriverBySurname(String surname) {
+        return driverRepository.getDriverDTOBySurname(surname);
     }
 }
