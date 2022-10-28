@@ -1,9 +1,10 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DAOs.ResultDAO;
+import com.f1.records.pojos.DTOs.ResultDTO;
 import com.f1.records.services.result.ResultServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,11 @@ public class ResultController {
     @Autowired
     ResultServiceImpl resultService;
 
-    @GetMapping(value = "/results")
-    public ResponseEntity<List<ResultDAO>> getResults(@RequestParam(defaultValue = "0") Integer pageNo,
+    @GetMapping(value = "/results", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ResultDTO>> getResults(@RequestParam(defaultValue = "0") Integer pageNo,
                                                       @RequestParam(defaultValue = "10") Integer pageSize,
                                                       @RequestParam(required = false) String sortBy) {
-        List<ResultDAO> resultDAOS = null;
+        List<ResultDTO> resultDAOS = null;
         if(sortBy != null)
             resultDAOS = resultService.getAllResults(pageNo, pageSize, sortBy);
         else
@@ -31,13 +32,13 @@ public class ResultController {
 
     }
 
-    @GetMapping(value = "/results/{raceYear}/{raceName}")
-    public ResponseEntity<List<ResultDAO>> getResultsByRaceNameAndYear(@PathVariable() int raceYear,
+    @GetMapping(value = "/results/{raceYear}/{raceName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ResultDTO>> getResultsByRaceNameAndYear(@PathVariable() int raceYear,
                                                                        @PathVariable() String raceName,
                                                                        @RequestParam(defaultValue = "0") Integer pageNo,
                                                                        @RequestParam(defaultValue = "10") Integer pageSize,
                                                                        @RequestParam(required = false) String sortBy) {
-        List<ResultDAO> resultDAOS = null;
+        List<ResultDTO> resultDAOS = null;
         if(sortBy != null)
             resultDAOS = resultService.getResultsByRaceYearAndRaceName(pageNo, pageSize, sortBy, raceYear, raceName);
         else
@@ -48,12 +49,12 @@ public class ResultController {
     }
 
     @GetMapping(value = "/results/{raceYear}/{raceName}/{driverNameAndSurname}")
-    public ResponseEntity<ResultDAO> getResultsByRaceNameAndYearAndDriverSurname(@PathVariable() int raceYear,
+    public ResponseEntity<ResultDTO> getResultsByRaceNameAndYearAndDriverSurname(@PathVariable() int raceYear,
                                                                                  @PathVariable() String raceName,
                                                                                  @PathVariable() String driverNameAndSurname) {
         String driverName = driverNameAndSurname.split(" ")[0];
         String driverSurname = driverNameAndSurname.split(" ")[1];
-        ResultDAO results = resultService.getResultsByRaceYearAndCircuitNameAndDriverSurname(raceYear, raceName, driverName, driverSurname);
+        ResultDTO results = resultService.getResultsByRaceYearAndCircuitNameAndDriverSurname(raceYear, raceName, driverName, driverSurname);
 
         return new ResponseEntity<>(results, HttpStatus.OK);
 

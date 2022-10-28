@@ -3,6 +3,7 @@ package com.f1.records.pojos.DAOs;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import com.f1.records.pojos.DTOs.RaceDTO;
 
 @Entity
 @Table(name = "laptimes")

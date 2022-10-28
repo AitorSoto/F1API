@@ -4,6 +4,7 @@ import com.f1.records.pojos.DAOs.LapTimeDAO;
 import com.f1.records.services.lapTime.LapTimeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class LapTimeController {
     @Autowired
     LapTimeServiceImpl lapTimeService;
 
-    @GetMapping(value = "/laptimes")
+    @GetMapping(value = "/laptimes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LapTimeDAO>> findAllLaptimes(@RequestParam(defaultValue = "0") Integer pageNo,
                                                             @RequestParam(defaultValue = "10") Integer pageSize,
                                                             @RequestParam(required = false) String sortBy) {
@@ -30,7 +31,7 @@ public class LapTimeController {
         return new ResponseEntity<>(lapTimeDAOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/laptimesById/{driverId}/{raceId}")
+    @GetMapping(value = "/laptimesById/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LapTimeDAO>> findByDriverIdAndRaceId(@PathVariable() int driverId,
                                                                     @PathVariable() int raceId,
                                                                     @RequestParam(defaultValue = "0") Integer pageNo,

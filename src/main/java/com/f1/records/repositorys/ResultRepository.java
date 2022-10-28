@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResultRepository extends PagingAndSortingRepository<ResultDAO, Integer> {
     /**/
-    //"SELECT r, d, ra, s, c, cir FROM Result r INNER JOIN Driver d INNER JOIN Race ra INNER JOIN Status s INNER JOIN Constructor c INNER JOIN Circuit cir WHERE r.raceId = ra.raceId AND r.driverId = d.driverId AND ra.circuitId = cir.circuitId AND ra.year = ?1 AND cir.name = ?2"
+    //"SELECT r FROM Result r INNER JOIN Driver d INNER JOIN Race ra INNER JOIN Status s INNER JOIN Constructor c INNER JOIN Circuit cir WHERE r.raceId = ra.raceId AND r.driverId = d.driverId AND ra.circuitId = cir.circuitId AND ra.year = ?1 AND cir.name = ?2"
     @Query(value = "SELECT * " +
             "FROM Results r INNER JOIN Drivers d INNER JOIN Races ra INNER JOIN status s " +
             "INNER JOIN Constructors c INNER JOIN circuits cir " +

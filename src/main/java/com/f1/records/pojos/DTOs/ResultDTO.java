@@ -25,7 +25,7 @@ public class ResultDTO {
     private String status;
     private String raceName;
     private int raceYear;
-    private String driverForeame;
+    private String driverForename;
     private String driverSurname;
     private String driverCode;
     private String driverNationality;

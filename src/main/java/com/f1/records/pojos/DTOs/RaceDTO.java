@@ -21,7 +21,7 @@ public class RaceDTO {
     private String raceName;
     private Date fp1Date;
     private Time fp1Time;
-    private Date fp2Date  ;
+    private Date fp2Date;
     private Time fp2Time;
     private Date fp3Date;
     private Time fp3Time;

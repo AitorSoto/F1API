@@ -1,5 +1,6 @@
 package com.f1.records.pojos.DAOs;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -46,7 +47,7 @@ public class ResultDAO {
     public ResultDAO() {
     }
 
-    public ResultDAO(int resultId, int raceId, int driverId, int constructorId, int number, int grid, int position, String positionText, int positionOrder, float points, int laps, String time, int milliseconds, int fastestLap, int rank, String fastestLapTime, String fastestLapSpeed, int statusId, RaceDAO raceDAO, DriverDAO driverDAO, ConstructorDAO constructorDAO, StatusDAO statusDAO) {
+    public ResultDAO(int resultId, int raceId, int driverId, int constructorId, int number, int grid, int position, String positionText, int positionOrder, float points, int laps, String time, int milliseconds, int fastestLap, int rank, String fastestLapTime, String fastestLapSpeed, int statusId, RaceDAO raceDAO, DriverDAO driverDAO, ConstructorDAO constructorDAO, StatusDAO StatusDAO) {
         this.resultId = resultId;
         this.raceId = raceId;
         this.driverId = driverId;
@@ -68,7 +69,7 @@ public class ResultDAO {
         this.raceDAO = raceDAO;
         this.driverDAO = driverDAO;
         this.constructorDAO = constructorDAO;
-        this.statusDAO = statusDAO;
+        this.statusDAO = StatusDAO;
     }
 
     public int getResultId() {
@@ -243,8 +244,8 @@ public class ResultDAO {
         return statusDAO;
     }
 
-    public void setStatus(StatusDAO statusDAO) {
-        this.statusDAO = statusDAO;
+    public void setStatus(StatusDAO StatusDAO) {
+        this.statusDAO = StatusDAO;
     }
 
     @Override

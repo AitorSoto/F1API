@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DAOs.PitStopDAO;
+import com.f1.records.pojos.DTOs.PitStopDTO;
 import com.f1.records.services.pitStopService.PitStopServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,44 +19,44 @@ public class PitStopController {
     PitStopServiceImpl pitStopService;
 
     @GetMapping(value = "/pitstops", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStopDAO>> findAllPitStops(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<PitStopDTO>> findAllPitStops(@RequestParam(defaultValue = "0") Integer pageNo,
                                                             @RequestParam(defaultValue = "10") Integer pageSize,
                                                             @RequestParam(required = false) String sortBy) {
-        List<PitStopDAO> lapTimes = null;
+        List<PitStopDTO> pitstops = null;
         if(sortBy != null)
-            lapTimes = pitStopService.findAllPitStops(pageNo, pageSize, sortBy);
+            pitstops = pitStopService.findAllPitStops(pageNo, pageSize, sortBy);
         else
-            lapTimes = pitStopService.findAllPitStops(pageNo, pageSize);
+            pitstops = pitStopService.findAllPitStops(pageNo, pageSize);
 
-        return new ResponseEntity<>(lapTimes, HttpStatus.OK);
+        return new ResponseEntity<>(pitstops, HttpStatus.OK);
     }
 
     @GetMapping(value = "/pitstops/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStopDAO>> findAllPitStopsByDriverId(@PathVariable() int driverId,
+    public ResponseEntity<List<PitStopDTO>> findAllPitStopsByDriverId(@PathVariable() int driverId,
                                                                       @RequestParam(defaultValue = "0") Integer pageNo,
                                                                       @RequestParam(defaultValue = "10") Integer pageSize,
                                                                       @RequestParam(required = false) String sortBy) {
-        List<PitStopDAO> lapTimes = null;
+        List<PitStopDTO> pitstops = null;
         if(sortBy != null)
-            lapTimes = pitStopService.findByDriverId(driverId, pageNo, pageSize, sortBy);
+            pitstops = pitStopService.findByDriverId(driverId, pageNo, pageSize, sortBy);
         else
-            lapTimes = pitStopService.findByDriverId(driverId, pageNo, pageSize);
+            pitstops = pitStopService.findByDriverId(driverId, pageNo, pageSize);
 
-        return new ResponseEntity<>(lapTimes, HttpStatus.OK);
+        return new ResponseEntity<>(pitstops, HttpStatus.OK);
     }
 
     @GetMapping(value = "/pitstops/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PitStopDAO>> findAllPitStopsByDriverIdAndRaceId(@PathVariable() int driverId,
+    public ResponseEntity<List<PitStopDTO>> findAllPitStopsByDriverIdAndRaceId(@PathVariable() int driverId,
                                                                                @PathVariable() int raceId,
                                                                                @RequestParam(defaultValue = "0") Integer pageNo,
                                                                                @RequestParam(defaultValue = "10") Integer pageSize,
                                                                                @RequestParam(required = false) String sortBy) {
-        List<PitStopDAO> lapTimes = null;
+        List<PitStopDTO> pitstops = null;
         if(sortBy != null)
-            lapTimes = pitStopService.findByDriverIdAndRaceId(driverId, raceId,pageNo, pageSize, sortBy);
+            pitstops = pitStopService.findByDriverIdAndRaceId(driverId, raceId,pageNo, pageSize, sortBy);
         else
-            lapTimes = pitStopService.findByDriverIdAndRaceId(driverId, raceId,pageNo, pageSize);
+            pitstops = pitStopService.findByDriverIdAndRaceId(driverId, raceId,pageNo, pageSize);
 
-        return new ResponseEntity<>(lapTimes, HttpStatus.OK);
+        return new ResponseEntity<>(pitstops, HttpStatus.OK);
     }
 }

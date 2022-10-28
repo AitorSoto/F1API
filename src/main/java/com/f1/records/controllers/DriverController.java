@@ -4,6 +4,7 @@ import com.f1.records.pojos.DAOs.DriverDAO;
 import com.f1.records.services.driver.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class DriverController {
     @Autowired
     DriverServiceImpl driverService;
 
-    @GetMapping(value = "/drivers")
+    @GetMapping(value = "/drivers", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DriverDAO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
                                                           @RequestParam(defaultValue = "10") Integer pageSize,
                                                           @RequestParam(required = false) String sortBy) {
@@ -30,7 +31,7 @@ public class DriverController {
         return new ResponseEntity<>(driverDAOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/drivers/{surname}")
+    @GetMapping(value = "/drivers/{surname}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DriverDAO> findDriverBySurname(@PathVariable String surname) {
         DriverDAO driverDAO = driverService.findDriverBySurname(surname);
         return new ResponseEntity<>(driverDAO, HttpStatus.OK);

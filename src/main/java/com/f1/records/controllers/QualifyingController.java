@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DAOs.QualifyingDAO;
+import com.f1.records.pojos.DTOs.QualifyingDTO;
 import com.f1.records.services.qualifying.QualifyingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,45 +19,45 @@ public class QualifyingController {
     QualifyingServiceImpl qualifyingService;
 
     @GetMapping(value = "/qualifyings", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<QualifyingDAO>> allQualifyings(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<QualifyingDTO>> allQualifyings(@RequestParam(defaultValue = "0") Integer pageNo,
                                                               @RequestParam(defaultValue = "10") Integer pageSize,
                                                               @RequestParam(required = false) String sortBy) {
-        List<QualifyingDAO> qualifyingDAOS = null;
+        List<QualifyingDTO> qualifyingDTOs = null;
         if(sortBy != null)
-            qualifyingDAOS = qualifyingService.getAllQualys(pageNo, pageSize, sortBy);
+            qualifyingDTOs = qualifyingService.getAllQualys(pageNo, pageSize, sortBy);
         else
-            qualifyingDAOS = qualifyingService.getAllQualys(pageNo, pageSize);
+            qualifyingDTOs = qualifyingService.getAllQualys(pageNo, pageSize);
 
-        return new ResponseEntity<>(qualifyingDAOS, HttpStatus.OK);
+        return new ResponseEntity<>(qualifyingDTOs, HttpStatus.OK);
     }
 
     @GetMapping(value = "/qualifyings/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<QualifyingDAO>> qualifyingsByRaceId(@PathVariable("raceId") int raceId,
+    public ResponseEntity<List<QualifyingDTO>> qualifyingsByRaceId(@PathVariable("raceId") int raceId,
                                                                    @RequestParam(defaultValue = "0") Integer pageNo,
                                                                    @RequestParam(defaultValue = "10") Integer pageSize,
                                                                    @RequestParam(required = false) String sortBy) {
-        List<QualifyingDAO> qualifyingDAOS = null;
+        List<QualifyingDTO> qualifyingDTOs = null;
         if(sortBy != null)
-            qualifyingDAOS = qualifyingService.getAllQualysByRaceId(raceId, pageNo, pageSize, sortBy);
+            qualifyingDTOs = qualifyingService.getAllQualysByRaceId(raceId, pageNo, pageSize, sortBy);
         else
-            qualifyingDAOS = qualifyingService.getAllQualysByRaceId(raceId, pageNo, pageSize);
+            qualifyingDTOs = qualifyingService.getAllQualysByRaceId(raceId, pageNo, pageSize);
 
-        return new ResponseEntity<>(qualifyingDAOS, HttpStatus.OK);
+        return new ResponseEntity<>(qualifyingDTOs, HttpStatus.OK);
     }
 
     @GetMapping(value = "/qualifyings/{raceId}/{constructorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<QualifyingDAO>> mecagoentusmuelas(@PathVariable("raceId") int raceId,
-                                                                 @PathVariable("constructorId") int constructorId) {
-        List<QualifyingDAO> qualifyingDAOS = qualifyingService.getAllQualysByRaceIdAndConstructorId(raceId, constructorId);
+    public ResponseEntity<List<QualifyingDTO>> qualifyingByRaceIdAndConstructorId(  @PathVariable("raceId") int raceId,
+                                                                                    @PathVariable("constructorId") int constructorId) {
+        List<QualifyingDTO> qualifyingDAOS = qualifyingService.getAllQualysByRaceIdAndConstructorId(raceId, constructorId);
 
         return new ResponseEntity<>(qualifyingDAOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/qualifying/{raceId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<QualifyingDAO> qualifyingByRaceIdAndDriverId(@PathVariable("raceId") int raceId,
+    public ResponseEntity<QualifyingDTO> qualifyingByRaceIdAndDriverId(@PathVariable("raceId") int raceId,
                                                                        @PathVariable("driverId") int driverId) {
-        QualifyingDAO qualifyingDAO = qualifyingService.getQualyByRaceIdAndDriverId(raceId, driverId);
+        QualifyingDTO qualifyingDTO = qualifyingService.getQualyByRaceIdAndDriverId(raceId, driverId);
 
-        return new ResponseEntity<>(qualifyingDAO, HttpStatus.OK);
+        return new ResponseEntity<>(qualifyingDTO, HttpStatus.OK);
     }
 }

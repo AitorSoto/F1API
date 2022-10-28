@@ -92,7 +92,7 @@ public class ConstructorResultDAO implements Serializable {
 
     @Override
     public String toString() {
-        return "ConstructorResultDTO{" +
+        return "ConstructorResultDAO{" +
                 "constructorResultId=" + constructorResultId +
                 ", raceId=" + raceId +
                 ", constructorId=" + constructorId +

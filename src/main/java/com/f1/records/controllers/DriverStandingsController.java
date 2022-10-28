@@ -4,6 +4,7 @@ import com.f1.records.pojos.DAOs.DriverStandingDAO;
 import com.f1.records.services.driverStandingsService.DriverStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class DriverStandingsController {
     @Autowired
     DriverStandingsServiceImpl driverStandingsService;
 
-    @GetMapping(value = "/driversStandings")
+    @GetMapping(value = "/driversStandings", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DriverStandingDAO>> findAllDriversStandings(@RequestParam(defaultValue = "0") Integer pageNo,
                                                                            @RequestParam(defaultValue = "10") Integer pageSize,
                                                                            @RequestParam(required = false) String sortBy) {
@@ -30,7 +31,7 @@ public class DriverStandingsController {
         return new ResponseEntity<>(driverStandingDAOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/driversStandingsById/{driverId}")
+    @GetMapping(value = "/driversStandingsById/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DriverStandingDAO>> findDriverStandingsByDriver(@RequestParam(defaultValue = "0") Integer pageNo,
                                                                                @RequestParam(defaultValue = "10") Integer pageSize,
                                                                                @RequestParam(required = false) String sortBy,
@@ -44,7 +45,7 @@ public class DriverStandingsController {
         return new ResponseEntity<>(driverStandingDAOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/driversStandingsById/{driverId}/{raceId}")
+    @GetMapping(value = "/driversStandingsById/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DriverStandingDAO> findDriverStandingsByDriverAndRace(@RequestParam(defaultValue = "0") Integer pageNo,
                                                                                 @RequestParam(defaultValue = "10") Integer pageSize,
                                                                                 @RequestParam(required = false) String sortBy,

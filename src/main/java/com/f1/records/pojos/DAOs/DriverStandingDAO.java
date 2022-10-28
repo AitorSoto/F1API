@@ -1,6 +1,7 @@
 package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
+import com.f1.records.pojos.DAOs.*;
 
 @Entity
 @Table(name = "driverstandings")

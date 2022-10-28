@@ -4,6 +4,7 @@ import com.f1.records.pojos.DAOs.CircuitDAO;
 import com.f1.records.services.circuit.CircuitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ public class CircuitController {
     @Autowired
     CircuitServiceImpl circuitService;
 
-    @GetMapping(value = "/circuits")
+    @GetMapping(value = "/circuits", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CircuitDAO>> getAllCircuits(@PathVariable() int pageNo,
                                                            @PathVariable() int pageSize,
                                                            @PathVariable(required = false) String sortBy) {
@@ -28,7 +29,7 @@ public class CircuitController {
         return new ResponseEntity<>(circuitService.getAllCircuits(10, 0), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/circuit/{id}")
+    @GetMapping(value = "/circuit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CircuitDAO> getCircuitById(@PathVariable int id) {
         return new ResponseEntity<>(circuitService.getCircuitById(id), HttpStatus.OK);
     }

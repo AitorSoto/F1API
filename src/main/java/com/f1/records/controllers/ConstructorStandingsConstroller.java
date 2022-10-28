@@ -4,6 +4,7 @@ import com.f1.records.pojos.DAOs.ConstructorStandingDAO;
 import com.f1.records.services.constructorStandings.ConstructorStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,12 @@ public class ConstructorStandingsConstroller {
     @Autowired
     ConstructorStandingsServiceImpl constructorService;
 
-    @GetMapping(value = "/constructorStandings")
+    @GetMapping(value = "/constructorStandings", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ConstructorStandingDAO>> getConstructorResults() {
         return new ResponseEntity<>(constructorService.findAllConstructorStandings(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/constructorStandingsById/{id}")
+    @GetMapping(value = "/constructorStandingsById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ConstructorStandingDAO>> getConstructorResultsById(@PathVariable int id) {
         return new ResponseEntity<>(constructorService.findConstructorStandingsById(id), HttpStatus.OK);
     }
