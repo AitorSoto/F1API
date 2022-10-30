@@ -1,11 +1,13 @@
 package com.f1.records.pojos.DAOs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "status")
-public class StatusDAO {
+public class StatusDAO implements Serializable {
     @Id
+    @Column(name = "statusId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statusId;
     private String status;

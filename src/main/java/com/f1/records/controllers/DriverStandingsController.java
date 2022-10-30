@@ -1,6 +1,6 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DAOs.DriverStandingDAO;
+import com.f1.records.pojos.DTOs.DriverStandingDTO;
 import com.f1.records.services.driverStandingsService.DriverStandingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,44 +19,37 @@ public class DriverStandingsController {
     DriverStandingsServiceImpl driverStandingsService;
 
     @GetMapping(value = "/driversStandings", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DriverStandingDAO>> findAllDriversStandings(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                                           @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                           @RequestParam(required = false) String sortBy) {
-        List<DriverStandingDAO> driverStandingDAOS = null;
+    public ResponseEntity<List<DriverStandingDTO>> findAllDriversStandings(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                             @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                             @RequestParam(required = false) String sortBy) {
+        List<DriverStandingDTO> driverStandingDTOS = null;
         if(sortBy != null)
-            driverStandingDAOS = driverStandingsService.findAllDriverStandings(pageNo, pageSize, sortBy);
+            driverStandingDTOS = driverStandingsService.findAllDriverStandings(pageNo, pageSize, sortBy);
         else
-            driverStandingDAOS = driverStandingsService.findAllDriverStandings(pageNo, pageSize);
+            driverStandingDTOS = driverStandingsService.findAllDriverStandings(pageNo, pageSize);
 
-        return new ResponseEntity<>(driverStandingDAOS, HttpStatus.OK);
+        return new ResponseEntity<>(driverStandingDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/driversStandingsById/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DriverStandingDAO>> findDriverStandingsByDriver(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<DriverStandingDTO>> findDriverStandingsByDriver(@RequestParam(defaultValue = "0") Integer pageNo,
                                                                                @RequestParam(defaultValue = "10") Integer pageSize,
                                                                                @RequestParam(required = false) String sortBy,
                                                                                @PathVariable int driverId) {
-        List<DriverStandingDAO> driverStandingDAOS = null;
+        List<DriverStandingDTO> driverStandingDTOS = null;
         if(sortBy != null)
-            driverStandingDAOS = driverStandingsService.findDriverStandingsByDriverId(pageNo, pageSize, sortBy, driverId);
+            driverStandingDTOS = driverStandingsService.findDriverStandingsByDriverId(pageNo, pageSize, sortBy, driverId);
         else
-            driverStandingDAOS = driverStandingsService.findDriverStandingsByDriverId(pageNo, pageSize, driverId);
+            driverStandingDTOS = driverStandingsService.findDriverStandingsByDriverId(pageNo, pageSize, driverId);
 
-        return new ResponseEntity<>(driverStandingDAOS, HttpStatus.OK);
+        return new ResponseEntity<>(driverStandingDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/driversStandingsById/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DriverStandingDAO> findDriverStandingsByDriverAndRace(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                                                @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                                @RequestParam(required = false) String sortBy,
-                                                                                @PathVariable int driverId,
+    public ResponseEntity<DriverStandingDTO> findDriverStandingsByDriverAndRace(@PathVariable int driverId,
                                                                                 @PathVariable int raceId) {
-        DriverStandingDAO driverStandingDAO = null;
-        if(sortBy != null)
-            driverStandingDAO = driverStandingsService.findDriverStandingsByDriverIdAndRaceId(pageNo, pageSize, sortBy, driverId, raceId);
-        else
-            driverStandingDAO = driverStandingsService.findDriverStandingsByDriverIdAndRaceId(pageNo, pageSize, driverId, raceId);
+        DriverStandingDTO driverStandingDTO =  driverStandingsService.findDriverStandingsByDriverIdAndRaceId(driverId, raceId);
 
-        return new ResponseEntity<>(driverStandingDAO, HttpStatus.OK);
+        return new ResponseEntity<>(driverStandingDTO, HttpStatus.OK);
     }
 }

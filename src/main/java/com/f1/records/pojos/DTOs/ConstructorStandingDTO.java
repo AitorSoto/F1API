@@ -14,5 +14,7 @@ public class ConstructorStandingDTO {
     private int position;
     private int wins;
     private String constructorName;
+    private String constructorNationality;
     private String raceName;
+    private int raceYear;
 }

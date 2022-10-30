@@ -19,5 +19,5 @@ public class DriverStandingDTO {
     private String driverCode;
     private String driverNationality;
     private String raceName;
-    private String raceYear;
+    private int raceYear;
 }

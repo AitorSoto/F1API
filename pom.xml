@@ -8,8 +8,8 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.indra.talents</groupId>
-	<artifactId>Agenda</artifactId>
+	<groupId>com.f1.records</groupId>
+	<artifactId>F1_Records</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>F1 Records</name>
 	<description></description>

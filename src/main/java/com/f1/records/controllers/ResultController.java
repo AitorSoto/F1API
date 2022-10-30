@@ -29,7 +29,6 @@ public class ResultController {
             resultDAOS = resultService.getAllResults(pageNo, pageSize);
 
         return new ResponseEntity<>(resultDAOS, HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/results/{raceYear}/{raceName}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +44,6 @@ public class ResultController {
             resultDAOS = resultService.getResultsByRaceYearAndRaceName(pageNo, pageSize, raceYear, raceName);
 
         return new ResponseEntity<>(resultDAOS, HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/results/{raceYear}/{raceName}/{driverNameAndSurname}")
@@ -57,7 +55,6 @@ public class ResultController {
         ResultDTO results = resultService.getResultsByRaceYearAndCircuitNameAndDriverSurname(raceYear, raceName, driverName, driverSurname);
 
         return new ResponseEntity<>(results, HttpStatus.OK);
-
     }
 
 }

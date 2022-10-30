@@ -1,11 +1,14 @@
 package com.f1.records.services.constructorStandings;
 
 
-import com.f1.records.pojos.DAOs.ConstructorStandingDAO;
+import com.f1.records.pojos.DTOs.ConstructorStandingDTO;
 
 import java.util.List;
 
 public interface ConstructorStandingsService {
-    List<ConstructorStandingDAO> findAllConstructorStandings();
-    List<ConstructorStandingDAO> findConstructorStandingsById(int id);
+    List<ConstructorStandingDTO> findAllConstructorStandings(int pageNo, int pageSize);
+    List<ConstructorStandingDTO> findAllConstructorStandings(int pageNo, int pageSize, String sortBy);
+    List<ConstructorStandingDTO> findConstructorStandingsById(int pageNo, int pageSize, int id);
+    List<ConstructorStandingDTO> findConstructorStandingsById(int pageNo, int pageSize, String sortBy, int id);
+    ConstructorStandingDTO findConstructorStandingDTOByRaceNameAndRaceYearAndConstructorName(String raceName, int raceYear, String constructorName);
 }

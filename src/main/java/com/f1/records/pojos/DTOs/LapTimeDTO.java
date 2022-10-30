@@ -15,7 +15,7 @@ public class LapTimeDTO {
     private String time;
     private int milliseconds;
     private String raceName;
-    private String raceYear;
+    private int raceYear;
     private String driverSurname;
     private String driverForename;
     private String driverCode;

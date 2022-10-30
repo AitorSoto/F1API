@@ -1,6 +1,7 @@
 package com.f1.records.controllers;
 
 import com.f1.records.pojos.DAOs.DriverDAO;
+import com.f1.records.pojos.DTOs.DriverDTO;
 import com.f1.records.services.driver.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,21 +20,27 @@ public class DriverController {
     DriverServiceImpl driverService;
 
     @GetMapping(value = "/drivers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DriverDAO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<DriverDTO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
                                                           @RequestParam(defaultValue = "10") Integer pageSize,
                                                           @RequestParam(required = false) String sortBy) {
-        List<DriverDAO> driverDAOS = null;
+        List<DriverDTO> driverDTOs = null;
         if(sortBy != null)
-            driverDAOS = driverService.findAllDrivers(pageNo, pageSize, sortBy);
+            driverDTOs = driverService.findAllDrivers(pageNo, pageSize, sortBy);
         else
-            driverDAOS = driverService.findAllDrivers(pageNo, pageSize);
+            driverDTOs = driverService.findAllDrivers(pageNo, pageSize);
 
-        return new ResponseEntity<>(driverDAOS, HttpStatus.OK);
+        return new ResponseEntity<>(driverDTOs, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/drivers/{surname}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DriverDAO> findDriverBySurname(@PathVariable String surname) {
-        DriverDAO driverDAO = driverService.findDriverBySurname(surname);
-        return new ResponseEntity<>(driverDAO, HttpStatus.OK);
+    @GetMapping(value = "/drivers/{completeName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DriverDTO> findDriverBySurname(@PathVariable String completeName) {
+        if(completeName.split(" ").length < 2){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        String surname, forename;
+        forename = completeName.split(" ")[0];
+        surname = completeName.split(" ")[1];
+        DriverDTO driverDTO = driverService.findDriverBySurname(forename, surname);
+        return new ResponseEntity<>(driverDTO, HttpStatus.OK);
     }
 }

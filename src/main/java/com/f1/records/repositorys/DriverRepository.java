@@ -5,6 +5,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DriverRepository  extends PagingAndSortingRepository<DriverDAO, Integer> {
-    DriverDAO getDriverDTOBySurname(String surname);
+public interface DriverRepository extends PagingAndSortingRepository<DriverDAO, Integer> {
+    DriverDAO getDriverDAOByForenameAndSurname(String forename, String surname);
 }
