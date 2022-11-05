@@ -14,7 +14,7 @@ public class DriverStandingDTO {
     private int position;
     private float points;
     private int wins;
-    private String driverForeame;
+    private String driverForename;
     private String driverSurname;
     private String driverCode;
     private String driverNationality;

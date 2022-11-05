@@ -104,7 +104,7 @@ public class UniversalMapper {
         driverStandingDTO.setPosition(driverStandingDAO.getPosition());
         driverStandingDTO.setPoints(driverStandingDAO.getPoints());
         driverStandingDTO.setWins(driverStandingDAO.getWins());
-        driverStandingDTO.setDriverForeame(driverStandingDAO.getDriver().getForename());
+        driverStandingDTO.setDriverForename(driverStandingDAO.getDriver().getForename());
         driverStandingDTO.setDriverSurname(driverStandingDAO.getDriver().getSurname());
         driverStandingDTO.setDriverCode(driverStandingDAO.getDriver().getCode());
         driverStandingDTO.setDriverNationality(driverStandingDAO.getDriver().getNationality());

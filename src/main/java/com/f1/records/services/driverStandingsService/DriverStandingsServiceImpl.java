@@ -23,28 +23,28 @@ public class DriverStandingsServiceImpl implements DriverStandingsService{
     public List<DriverStandingDTO> findAllDriverStandings(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<DriverStandingDAO> driverStandings = driverStandingsRepository.findAll(pageable);
-        return transfromListDAOIntoListDTO(driverStandings.getContent());
+        return transformListDAOIntoListDTO(driverStandings.getContent());
     }
 
     @Override
     public List<DriverStandingDTO> findAllDriverStandings(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<DriverStandingDAO> driverStandings = driverStandingsRepository.findAll(pageable);
-        return transfromListDAOIntoListDTO(driverStandings.getContent());
+        return transformListDAOIntoListDTO(driverStandings.getContent());
     }
 
     @Override
     public List<DriverStandingDTO> findDriverStandingsByDriverId(int pageNo, int pageSize, int driverId) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<DriverStandingDAO> driverStandings = driverStandingsRepository.getDriverDTOStandingsByDriverId(driverId, pageable);
-        return transfromListDAOIntoListDTO(driverStandings.getContent());
+        return transformListDAOIntoListDTO(driverStandings.getContent());
     }
 
     @Override
     public List<DriverStandingDTO> findDriverStandingsByDriverId(int pageNo, int pageSize, String sortBy, int driverId) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<DriverStandingDAO> driverStandings = driverStandingsRepository.getDriverDTOStandingsByDriverId(driverId, pageable);
-        return transfromListDAOIntoListDTO(driverStandings.getContent());
+        return transformListDAOIntoListDTO(driverStandings.getContent());
     }
 
     @Override
@@ -54,7 +54,27 @@ public class DriverStandingsServiceImpl implements DriverStandingsService{
         return UniversalMapper.driverStandingToDTO(driverStandings);
     }
 
-    private List<DriverStandingDTO> transfromListDAOIntoListDTO(List<DriverStandingDAO> driverStandingDAOS){
+    @Override
+    public List<DriverStandingDTO> getDriverStandingsByDriverFullName(int pageNo, int pageSize, String forename, String surname) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<DriverStandingDAO> pages = driverStandingsRepository.getDriverStandingsByDriverFullName(forename, surname, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<DriverStandingDTO> getDriverStandingsByDriverFullName(int pageNo, int pageSize, String sortBy, String forename, String surname) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<DriverStandingDAO> pages = driverStandingsRepository.getDriverStandingsByDriverFullName(forename, surname, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public DriverStandingDTO getDriverStandingsByDriverFullNameRaceName(String forename, String surname, String raceName, int year) {
+        DriverStandingDAO driverStandingDAO = driverStandingsRepository.getDriverStandingsByDriverFullNameRaceNameAndYear(forename, surname, raceName, year);
+        return UniversalMapper.driverStandingToDTO(driverStandingDAO);
+    }
+
+    private List<DriverStandingDTO> transformListDAOIntoListDTO(List<DriverStandingDAO> driverStandingDAOS){
         List<DriverStandingDTO> driverStandingDTOS = new ArrayList<>();
         for(DriverStandingDAO result: driverStandingDAOS){
             driverStandingDTOS.add(UniversalMapper.driverStandingToDTO(result));
