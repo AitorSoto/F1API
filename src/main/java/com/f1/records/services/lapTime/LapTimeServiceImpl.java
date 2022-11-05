@@ -2,9 +2,7 @@ package com.f1.records.services.lapTime;
 
 import com.f1.records.mappers.UniversalMapper;
 import com.f1.records.pojos.DAOs.LapTimeDAO;
-import com.f1.records.pojos.DAOs.PitStopDAO;
 import com.f1.records.pojos.DTOs.LapTimeDTO;
-import com.f1.records.pojos.DTOs.PitStopDTO;
 import com.f1.records.repositorys.LapTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +24,7 @@ public class LapTimeServiceImpl implements LapTimeService{
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<LapTimeDAO> lapTimesPageable = lapTimeRepository.findAll(paging);
 
-        return transfromListDAOIntoListDTO(lapTimesPageable.getContent());
+        return transformListDAOIntoListDTO(lapTimesPageable.getContent());
     }
 
     @Override
@@ -34,7 +32,7 @@ public class LapTimeServiceImpl implements LapTimeService{
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Page<LapTimeDAO> lapTimesPageable = lapTimeRepository.findAll(paging);
 
-        return transfromListDAOIntoListDTO(lapTimesPageable.getContent());
+        return transformListDAOIntoListDTO(lapTimesPageable.getContent());
     }
 
     @Override
@@ -42,7 +40,7 @@ public class LapTimeServiceImpl implements LapTimeService{
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<LapTimeDAO> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
 
-        return transfromListDAOIntoListDTO(lapTimePage.getContent());
+        return transformListDAOIntoListDTO(lapTimePage.getContent());
     }
 
     @Override
@@ -50,10 +48,24 @@ public class LapTimeServiceImpl implements LapTimeService{
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Page<LapTimeDAO> lapTimePage = lapTimeRepository.getAllLapsTimesByDriverIdAndRaceId(driverId, raceId, paging);
 
-        return transfromListDAOIntoListDTO(lapTimePage.getContent());
+        return transformListDAOIntoListDTO(lapTimePage.getContent());
     }
 
-    private List<LapTimeDTO> transfromListDAOIntoListDTO(List<LapTimeDAO> laptimeDAOs){
+    @Override
+    public List<LapTimeDTO> getAllLapTimesByDriverFullNameAndRaceNameAndYear(String forename, String surname, String raceName, int year, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<LapTimeDAO> pages = lapTimeRepository.getAllLapTimesByDriverFullNameAndRaceNameAndYear(forename, surname, raceName, year, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<LapTimeDTO> getAllLapTimesByDriverFullNameAndRaceNameAndYear(String forename, String surname, String raceName, int year, int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+        Page<LapTimeDAO> pages = lapTimeRepository.getAllLapTimesByDriverFullNameAndRaceNameAndYear(forename, surname, raceName, year, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    private List<LapTimeDTO> transformListDAOIntoListDTO(List<LapTimeDAO> laptimeDAOs){
         List<LapTimeDTO> laptimeDTOs = new ArrayList<>();
         for(LapTimeDAO result: laptimeDAOs){
             laptimeDTOs.add(UniversalMapper.laptimeToDTO(result));

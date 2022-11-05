@@ -32,7 +32,7 @@ public class LapTimeController {
         return new ResponseEntity<>(lapTimeDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/laptimesById/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/laptimes/byId/{driverId}/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LapTimeDTO>> findByDriverIdAndRaceId(@PathVariable() int driverId,
                                                                     @PathVariable() int raceId,
                                                                     @RequestParam(defaultValue = "0") Integer pageNo,
@@ -43,6 +43,25 @@ public class LapTimeController {
             lapTimeDTOS = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize, sortBy);
         else
             lapTimeDTOS = lapTimeService.findByDriverIdAndRaceId(driverId, raceId, pageNo, pageSize);
+
+        return new ResponseEntity<>(lapTimeDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/laptimes/byName/{driverFullName}/{raceName}/{year}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LapTimeDTO>> getAllLapTimesByDriverFullNameAndRaceName(  @PathVariable() String driverFullName,
+                                                                                        @PathVariable() String raceName,
+                                                                                        @PathVariable() int year,
+                                                                                        @RequestParam(defaultValue = "0") Integer pageNo,
+                                                                                        @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                                        @RequestParam(required = false) String sortBy) {
+        String forename, surname;
+        forename = driverFullName.split(" ")[0];
+        surname = driverFullName.split(" ")[1];
+        List<LapTimeDTO> lapTimeDTOS = null;
+        if(sortBy != null)
+            lapTimeDTOS = lapTimeService.getAllLapTimesByDriverFullNameAndRaceNameAndYear(forename, surname, raceName, year, pageNo, pageSize, sortBy);
+        else
+            lapTimeDTOS = lapTimeService.getAllLapTimesByDriverFullNameAndRaceNameAndYear(forename, surname, raceName, year, pageNo, pageSize);
 
         return new ResponseEntity<>(lapTimeDTOS, HttpStatus.OK);
     }
