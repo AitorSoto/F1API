@@ -12,6 +12,7 @@ public class PitStopDTO {
     private int driverId;
     private int stop;
     private int lap;
+    private int year;
     private String duration;
     private String raceName;
     private String driverSurname;

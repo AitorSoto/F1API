@@ -24,7 +24,7 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<PitStopDAO> pitStops = pitStopRepository.findAll(pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<PitStopDAO> pitStops = pitStopRepository.findAll(pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverId(driverId, pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverId(driverId, pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverIdAndRaceId(driverId, raceId, pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
     @Override
@@ -64,10 +64,58 @@ public class PitStopServiceImpl implements PitStopService {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<PitStopDAO> pitStops = pitStopRepository.findPitStopDTOByDriverIdAndRaceId(driverId, raceId, pageable);
 
-        return transfromListDAOIntoListDTO(pitStops.getContent());
+        return transformListDAOIntoListDTO(pitStops.getContent());
     }
 
-    private List<PitStopDTO> transfromListDAOIntoListDTO(List<PitStopDAO> pitStopDAOs){
+    @Override
+    public List<PitStopDTO> findByRaceNameAndYear(String raceName, int year, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceNameAndYear(year, raceName, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<PitStopDTO> findByRaceNameAndYear(String raceName, int year, int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceNameAndYear(year, raceName, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<PitStopDTO> findByRaceName(String raceName, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceName(raceName, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<PitStopDTO> findByRaceName(String raceName, int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceName(raceName, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<PitStopDTO> findByRaceNameAndRaceYearAndDriverFullName(String raceName, int year, String driverForename, String driverSurname, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceNameAndRaceYearAndDriverFullName(raceName, year, driverForename, driverSurname, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<PitStopDTO> findByRaceNameAndRaceYearAndDriverFullName(String raceName, int year, String driverForename, String driverSurname, int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<PitStopDAO> pages = pitStopRepository.findByRaceNameAndRaceYearAndDriverFullName(raceName, year, driverForename, driverSurname, pageable);
+
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    private List<PitStopDTO> transformListDAOIntoListDTO(List<PitStopDAO> pitStopDAOs){
         List<PitStopDTO> pitStopDTOS = new ArrayList<>();
         for(PitStopDAO result: pitStopDAOs){
             pitStopDTOS.add(UniversalMapper.pitStopToDTO(result));

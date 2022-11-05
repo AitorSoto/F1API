@@ -74,6 +74,7 @@ public class UniversalMapper {
         pitStopDTO.setDriverSurname(pitStopDAO.getDriver().getSurname());
         pitStopDTO.setDriverForename(pitStopDAO.getDriver().getForename());
         pitStopDTO.setDriverNationality(pitStopDAO.getDriver().getNationality());
+        pitStopDTO.setYear(pitStopDAO.getRace().getYear());
         return pitStopDTO;
     }
 
