@@ -31,7 +31,7 @@ public class QualifyingController {
         return new ResponseEntity<>(qualifyingDTOs, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/qualifyings/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/qualifyings/byId/{raceId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<QualifyingDTO>> qualifyingsByRaceId(@PathVariable("raceId") int raceId,
                                                                    @RequestParam(defaultValue = "0") Integer pageNo,
                                                                    @RequestParam(defaultValue = "10") Integer pageSize,
@@ -45,19 +45,89 @@ public class QualifyingController {
         return new ResponseEntity<>(qualifyingDTOs, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/qualifyings/{raceId}/{constructorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<QualifyingDTO>> qualifyingByRaceIdAndConstructorId(  @PathVariable("raceId") int raceId,
+    @GetMapping(value = "/qualifyings/byId/{raceId}/{constructorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<QualifyingDTO>> qualifyingByRaceIdAndConstructorId(  @RequestParam(defaultValue = "0") Integer pageNo,
+                                                                                    @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                                    @RequestParam(required = false) String sortBy,
+                                                                                    @PathVariable("raceId") int raceId,
                                                                                     @PathVariable("constructorId") int constructorId) {
-        List<QualifyingDTO> qualifyingDAOS = qualifyingService.getAllQualysByRaceIdAndConstructorId(raceId, constructorId);
+
+        List<QualifyingDTO> qualifyingDAOS = null;
+        if(sortBy == null)
+            qualifyingService.getAllQualysByRaceIdAndConstructorId(pageNo, pageSize, raceId, constructorId);
+        else
+            qualifyingService.getAllQualysByRaceIdAndConstructorId(pageNo, pageSize, sortBy, raceId, constructorId);
 
         return new ResponseEntity<>(qualifyingDAOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/qualifying/{raceId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/qualifying/byId/{raceId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<QualifyingDTO> qualifyingByRaceIdAndDriverId(@PathVariable("raceId") int raceId,
                                                                        @PathVariable("driverId") int driverId) {
         QualifyingDTO qualifyingDTO = qualifyingService.getQualyByRaceIdAndDriverId(raceId, driverId);
 
         return new ResponseEntity<>(qualifyingDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/qualifying/byname/{raceName}/{constructorName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<QualifyingDTO>> getQualifyingByRaceNameAndConstructorName(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                                         @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                                         @RequestParam(required = false) String sortBy,
+                                                                                         @PathVariable("raceName") String raceName,
+                                                                                         @PathVariable("constructorName") String constructorName) {
+        List<QualifyingDTO> qualifyingDTOS = null;
+        if(sortBy == null)
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndConstructorName(pageNo, pageSize, raceName, constructorName);
+        else
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndConstructorName(pageNo, pageSize, sortBy, raceName, constructorName);
+
+        return new ResponseEntity<>(qualifyingDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/qualifying/byName/{raceName}/{driverFullName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<QualifyingDTO>> getQualifyingByRaceNameAndDriverFullName(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                                        @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                                        @RequestParam(required = false) String sortBy,
+                                                                                        @PathVariable("raceName") String raceName,
+                                                                                        @PathVariable("driverFullName") String driverFullName) {
+        String forename, surname;
+        forename = driverFullName.split(" ")[0];
+        surname = driverFullName.split(" ")[1];
+        List<QualifyingDTO> qualifyingDTOS = null;
+        if(sortBy == null)
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndDriverFullName(pageNo, pageSize, raceName, forename, surname);
+        else
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndDriverFullName(pageNo, pageSize, sortBy, raceName, forename, surname);
+
+        return new ResponseEntity<>(qualifyingDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/qualifyings/byName/{raceName}/{year}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<QualifyingDTO>> getQualifyingByRaceNameAndRaceYear(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                                  @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                                  @RequestParam(required = false) String sortBy,
+                                                                                  @PathVariable("raceName") String raceName,
+                                                                                  @PathVariable("year") int year) {
+        List<QualifyingDTO> qualifyingDTOS = null;
+        if(sortBy == null)
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndRaceYear(pageNo, pageSize, raceName, year);
+        else
+            qualifyingDTOS = qualifyingService.getQualifyingByRaceNameAndRaceYear(pageNo, pageSize, sortBy, raceName, year);
+
+        return new ResponseEntity<>(qualifyingDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/qualifyings/byName/{raceName}/{year}/{driverFullName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<QualifyingDTO> getQualifyingByRaceNameAndRaceYearAndDriverFullName(@PathVariable("raceName") String raceName,
+                                                                                                   @PathVariable("year") int year,
+                                                                                                   @PathVariable("driverFullName") String driverFullName) {
+        String forename, surname;
+        forename = driverFullName.split(" ")[0];
+        surname = driverFullName.split(" ")[1];
+        QualifyingDTO qualifyingDTO =
+                qualifyingService.getQualifyingByRaceNameAndRaceYearAndDriverFullName(raceName, year, forename, surname);
+        return new ResponseEntity<>(qualifyingDTO, HttpStatus.OK);
+    }
+
+
 }

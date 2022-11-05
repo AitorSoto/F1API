@@ -58,6 +58,7 @@ public class UniversalMapper {
         qualifyingDTO.setDriverNationality(qDAO.getDriver().getNationality());
         qualifyingDTO.setConstructorName(qDAO.getConstructor().getName());
         qualifyingDTO.setConstructorNationality(qDAO.getConstructor().getNationality());
+        qualifyingDTO.setYear(qDAO.getRace().getYear());
         return qualifyingDTO;
     }
 

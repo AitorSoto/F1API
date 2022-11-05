@@ -14,6 +14,7 @@ public class QualifyingDTO {
     private int constructorId;
     private int number;
     private int position;
+    private int year;
     private String q1;
     private String q2;
     private String q3;

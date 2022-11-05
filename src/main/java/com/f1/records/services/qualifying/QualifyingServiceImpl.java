@@ -24,7 +24,7 @@ public class QualifyingServiceImpl implements QualifyingService{
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<QualifyingDAO> qualifyings = qualifyingRepository.findAll(pageable);
 
-        return transfromListDAOIntoListDTO(qualifyings.getContent());
+        return transformListDAOIntoListDTO(qualifyings.getContent());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class QualifyingServiceImpl implements QualifyingService{
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<QualifyingDAO> qualifyings = qualifyingRepository.findAll(pageable);
 
-        return transfromListDAOIntoListDTO(qualifyings.getContent());
+        return transformListDAOIntoListDTO(qualifyings.getContent());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class QualifyingServiceImpl implements QualifyingService{
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<QualifyingDAO> qualifyings = qualifyingRepository.getQualifyingDTOByRaceId(raceId, pageable);
 
-        return transfromListDAOIntoListDTO(qualifyings.getContent());
+        return transformListDAOIntoListDTO(qualifyings.getContent());
     }
 
     @Override
@@ -55,17 +55,74 @@ public class QualifyingServiceImpl implements QualifyingService{
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<QualifyingDAO> qualifyings = qualifyingRepository.getQualifyingDTOByRaceId(raceId, pageable);
 
-        return transfromListDAOIntoListDTO(qualifyings.getContent());
+        return transformListDAOIntoListDTO(qualifyings.getContent());
     }
 
     @Override
-    public List<QualifyingDTO> getAllQualysByRaceIdAndConstructorId(int raceId, int constructorId) {
-        List<QualifyingDAO> qualifyingDAOS = qualifyingRepository.getQualifyingDTOByRaceIdAndConstructorId(raceId, constructorId);
+    public List<QualifyingDTO> getAllQualysByRaceIdAndConstructorId(int pageNo, int pageSize, int raceId, int constructorId) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingDTOByRaceIdAndConstructorId(raceId, constructorId, pageable);
 
-        return transfromListDAOIntoListDTO(qualifyingDAOS);
+        return transformListDAOIntoListDTO(pages.getContent());
     }
 
-    private List<QualifyingDTO> transfromListDAOIntoListDTO(List<QualifyingDAO> qualiDAOs){
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndDriverFullName(int pageNo, int pageSize, String sortBy, String raceName, String forename, String surname) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndDriverFullName(raceName, forename, surname, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndDriverFullName(int pageNo, int pageSize, String raceName, String forename, String surname) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndDriverFullName(raceName, forename, surname, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndRaceYear(int pageNo, int pageSize, String raceName, int raceYear) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndRaceYear(raceName, raceYear, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndRaceYear(int pageNo, int pageSize, String sortBy, String raceName, int raceYear) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndRaceYear(raceName, raceYear, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public QualifyingDTO getQualifyingByRaceNameAndRaceYearAndDriverFullName(String raceName, int raceYear, String forename, String surname) {
+        QualifyingDAO qualifyingDAO = qualifyingRepository.getQualifyingByRaceNameAndRaceYearAndDriverFullName(raceName, raceYear, forename, surname);
+        return UniversalMapper.qualifyingToDTO(qualifyingDAO);
+    }
+
+    @Override
+    public List<QualifyingDTO> getAllQualysByRaceIdAndConstructorId(int pageNo, int pageSize, String sortBy, int raceId, int constructorId) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingDTOByRaceIdAndConstructorId(raceId, constructorId, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndConstructorName(int pageNo, int pageSize, String raceName, String constructorName) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndConstructorName(raceName, constructorName, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    @Override
+    public List<QualifyingDTO> getQualifyingByRaceNameAndConstructorName(int pageNo, int pageSize, String sortBy, String raceName, String constructorName) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<QualifyingDAO> pages = qualifyingRepository.getQualifyingByRaceNameAndConstructorName(raceName, constructorName, pageable);
+        return transformListDAOIntoListDTO(pages.getContent());
+    }
+
+    private List<QualifyingDTO> transformListDAOIntoListDTO(List<QualifyingDAO> qualiDAOs){
         List<QualifyingDTO> qualifyingDTOS = new ArrayList<>();
         for(QualifyingDAO result: qualiDAOs){
             qualifyingDTOS.add(UniversalMapper.qualifyingToDTO(result));
