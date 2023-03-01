@@ -22,7 +22,7 @@ NOTE: f1 is my own name of the database, you have to put the one you have put pr
 ## Authors
 
 - [@AitorSotoJimenez on LinkedIn](https://www.linkedin.com/in/aitorsotojimenez/)
-- [@AitrollSr on GitHub](https://github.com/AitrollSr)
+- [@AitrollSr on GitHub](https://github.com/AitorSoto)
 
 
 ## Acknowledgements
