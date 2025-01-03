@@ -42,6 +42,11 @@ public class DriverServiceImpl implements DriverService{
         return UniversalMapper.driverToDTO(driverRepository.getDriverDAOByForenameAndSurname(forename, surname));
     }
 
+    @Override
+    public int getNumberOfDrivers() {
+        return (int)driverRepository.getNumberOfDrivers();
+    }
+
     private List<DriverDTO> transfromListDAOIntoListDTO(List<DriverDAO> driverDAOS){
         List<DriverDTO> driversDTOs = new ArrayList<>();
         for(DriverDAO result: driverDAOS){

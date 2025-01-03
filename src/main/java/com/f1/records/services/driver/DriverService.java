@@ -9,4 +9,5 @@ public interface DriverService {
     List<DriverDTO> findAllDrivers(int pageNo, int pageSize, String sortBy);
     List<DriverDTO> findAllDrivers(int pageNo, int pageSize);
     DriverDTO findDriverBySurname(String forename, String surname);
+    int getNumberOfDrivers();
 }
