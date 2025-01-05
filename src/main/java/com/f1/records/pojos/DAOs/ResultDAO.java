@@ -37,7 +37,7 @@ public class ResultDAO {
     @OneToOne
     @JoinColumn(name = "driver_id", insertable=false, updatable=false)
     private DriverDAO driverDAO;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "constructor_id", insertable=false, updatable=false)
     private ConstructorDAO constructorDAO;
     @OneToOne

@@ -9,8 +9,6 @@ public class UniversalMapper {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setResultId(resultDAO.getResultId());
         resultDTO.setConstructorId(resultDAO.getConstructorId());
-        resultDTO.setConstructorName(resultDAO.getConstructor().getName());
-        resultDTO.setConstructorNationality(resultDAO.getConstructor().getNationality());
         resultDTO.setDriverId(resultDAO.getDriverId());
         resultDTO.setDriverForename(resultDAO.getDriver().getForename());
         resultDTO.setDriverSurname(resultDAO.getDriver().getSurname());

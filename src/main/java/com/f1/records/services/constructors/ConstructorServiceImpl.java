@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -43,6 +44,11 @@ public class ConstructorServiceImpl implements ConstructorService{
     public ConstructorDTO findConstructorById(int idConstructor) {
         ConstructorDAO constructorDAO = constructorRepository.findConstructorByConstructorId(idConstructor);
         return UniversalMapper.constructorToDTO(constructorDAO);
+    }
+
+    @Override
+    public List<String> findAllConstructorsByDriverId(int driverId) {
+        return constructorRepository.findConstructorsOfId(driverId);
     }
 
     private List<ConstructorDTO> transformListDAOIntoListDTO(List<ConstructorDAO> constructorsDAo){

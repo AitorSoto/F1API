@@ -22,5 +22,8 @@ public interface RaceRepository extends PagingAndSortingRepository<RaceDAO, Inte
     @Query("select r from RaceDAO r where r.circuitDAO.country = ?1")
     Page<RaceDAO> getRacesByCountry(String country, Pageable pageable);
 
+    @Query("select count(r) from RaceDAO r")
+    long getRacesNumber();
+
 
 }
