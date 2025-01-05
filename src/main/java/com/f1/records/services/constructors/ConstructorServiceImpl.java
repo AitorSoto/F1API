@@ -48,7 +48,7 @@ public class ConstructorServiceImpl implements ConstructorService{
 
     @Override
     public List<String> findAllConstructorsByDriverId(int driverId) {
-        return constructorRepository.findConstructorsOfId(driverId);
+        return cleanScuderias(constructorRepository.findConstructorsOfId(driverId));
     }
 
     private List<ConstructorDTO> transformListDAOIntoListDTO(List<ConstructorDAO> constructorsDAo){
@@ -57,5 +57,17 @@ public class ConstructorServiceImpl implements ConstructorService{
             constructorsDTO.add(UniversalMapper.constructorToDTO(result));
         }
         return constructorsDTO;
+    }
+
+    private List<String> cleanScuderias(List<String> scuderias){
+        String currentScuderia = "";
+        List<String> scuderiasClean = new ArrayList<>();
+        for (String scuderia : scuderias) {
+            if (!currentScuderia.equals(scuderia)) {
+                scuderiasClean.add(scuderia);
+                currentScuderia = scuderia;
+            }
+        }
+        return scuderiasClean;
     }
 }

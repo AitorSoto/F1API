@@ -44,6 +44,8 @@ public class DriverController {
 
     @GetMapping(value = "/drivers/match", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DriverDTO>> findDriverBySurname(@RequestParam String name) {
+        if(name.isEmpty())
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         List<DriverDTO> driverDTO = driverService.findByName(name);
         return new ResponseEntity<>(driverDTO, HttpStatus.OK);
     }
