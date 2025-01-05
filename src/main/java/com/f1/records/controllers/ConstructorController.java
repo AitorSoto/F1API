@@ -36,4 +36,9 @@ public class ConstructorController {
     public ResponseEntity<ConstructorDTO> getConstructorByName(@PathVariable String constructorName) {
         return new ResponseEntity<>(constructorService.findConstructorByName(constructorName), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/constructor/byDriverId/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> getConstructorByName(@PathVariable int driverId) {
+        return new ResponseEntity<>(constructorService.findAllConstructorsByDriverId(driverId), HttpStatus.OK);
+    }
 }

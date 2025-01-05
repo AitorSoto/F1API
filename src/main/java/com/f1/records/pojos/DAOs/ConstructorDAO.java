@@ -65,7 +65,6 @@ public class ConstructorDAO {
         this.url = url;
     }
 
-
     @Override
     public String toString() {
         return "Constructor{" +

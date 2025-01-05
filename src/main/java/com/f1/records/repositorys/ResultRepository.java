@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ResultRepository extends PagingAndSortingRepository<ResultDAO, Integer> {
     @Query(value = "SELECT * " +
@@ -22,4 +24,5 @@ public interface ResultRepository extends PagingAndSortingRepository<ResultDAO, 
             "ON r.race_id = ra.race_id AND r.driver_id = d.driver_id AND ra.circuit_id = cir.circuit_id AND r.constructor_id = c.constructor_id AND s.status_id = r.status_id " +
             "WHERE ra.year = ?1 AND ra.name = ?2 AND d.surname = ?4 AND d.forename = ?3", nativeQuery = true)
     ResultDAO getResultsByRaceYearAndCircuitNameAndDriverSurname(int raceYear, String circuitName, String driverName, String driverSurname);
+
 }

@@ -81,6 +81,11 @@ public class RaceServiceImpl implements RaceService{
         return transformListDTOIntoListDTO(pages.getContent());
     }
 
+    @Override
+    public long getNumberOfRaces() {
+        return raceRepository.getRacesNumber();
+    }
+
     private List<RaceDTO> transformListDTOIntoListDTO(List<RaceDAO> raceDAOS){
         List<RaceDTO> raceDTOS = new ArrayList<>();
         for(RaceDAO result: raceDAOS){

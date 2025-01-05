@@ -14,4 +14,5 @@ public interface RaceService {
     List<RaceDTO> getRacesByCircuit(int pageNo, int pageSize, String sortBy, String circuitName);
     List<RaceDTO> getRacesByCountry(int pageNo, int pageSize, String country);
     List<RaceDTO> getRacesByCountry(int pageNo, int pageSize, String sortBy, String country);
+    long getNumberOfRaces();
 }

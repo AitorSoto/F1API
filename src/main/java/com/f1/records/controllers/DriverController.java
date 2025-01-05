@@ -1,7 +1,8 @@
 package com.f1.records.controllers;
 
-import com.f1.records.pojos.DAOs.DriverDAO;
 import com.f1.records.pojos.DTOs.DriverDTO;
+import com.f1.records.pojos.pagination.PaginationInfo;
+import com.f1.records.pojos.pagination.Wrapper;
 import com.f1.records.services.driver.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,27 +21,37 @@ public class DriverController {
     DriverServiceImpl driverService;
 
     @GetMapping(value = "/drivers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DriverDTO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<Wrapper<DriverDTO>> findAllDrivers(@RequestParam(defaultValue = "0") Integer pageNo,
                                                           @RequestParam(defaultValue = "10") Integer pageSize,
                                                           @RequestParam(required = false) String sortBy) {
         List<DriverDTO> driverDTOs = null;
+        Wrapper<DriverDTO> driverDTOWrapper = new Wrapper<>();
         if(sortBy != null)
             driverDTOs = driverService.findAllDrivers(pageNo, pageSize, sortBy);
         else
             driverDTOs = driverService.findAllDrivers(pageNo, pageSize);
 
-        return new ResponseEntity<>(driverDTOs, HttpStatus.OK);
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setCurrentPage(pageNo);
+        paginationInfo.setHasNext(pageNo < (driverService.getNumberOfDrivers()) / pageSize);
+        paginationInfo.setNumberOfPages(driverService.getNumberOfDrivers() / pageSize);
+
+        driverDTOWrapper.setDto(driverDTOs);
+        driverDTOWrapper.setPaginationInfo(paginationInfo);
+
+        return new ResponseEntity<>(driverDTOWrapper, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/drivers/{completeName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DriverDTO> findDriverBySurname(@PathVariable String completeName) {
-        if(completeName.split(" ").length < 2){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        String surname, forename;
-        forename = completeName.split(" ")[0];
-        surname = completeName.split(" ")[1];
-        DriverDTO driverDTO = driverService.findDriverBySurname(forename, surname);
+    @GetMapping(value = "/drivers/match", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<DriverDTO>> findDriverBySurname(@RequestParam String name) {
+        List<DriverDTO> driverDTO = driverService.findByName(name);
         return new ResponseEntity<>(driverDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/drivers/byId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DriverDTO> findById(@PathVariable int id){
+        DriverDTO driver = driverService.findById(id);
+
+        return  new ResponseEntity<>(driver, HttpStatus.OK);
     }
 }

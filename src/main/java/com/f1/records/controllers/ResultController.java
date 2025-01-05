@@ -56,5 +56,4 @@ public class ResultController {
 
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
-
 }

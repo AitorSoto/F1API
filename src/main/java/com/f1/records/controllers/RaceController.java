@@ -1,6 +1,8 @@
 package com.f1.records.controllers;
 
 import com.f1.records.pojos.DTOs.RaceDTO;
+import com.f1.records.pojos.pagination.PaginationInfo;
+import com.f1.records.pojos.pagination.Wrapper;
 import com.f1.records.services.race.RaceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,13 +31,27 @@ public class RaceController {
     }
 
     @GetMapping(value = "/races/year/{year}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<RaceDTO>> getRacesByYear(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<Wrapper<RaceDTO>> getRacesByYear(@RequestParam(defaultValue = "0") Integer pageNo,
                                                         @RequestParam(defaultValue = "10") Integer pageSize,
                                                         @RequestParam(required = false) String sortBy,
                                                         @PathVariable int year) {
-        if(sortBy == null)
-            return new ResponseEntity<>(raceService.getRacesByYear(pageNo, pageSize, year), HttpStatus.OK);
-        return new ResponseEntity<>(raceService.getRacesByYear(pageNo, pageSize, sortBy, year), HttpStatus.OK);
+
+        Wrapper<RaceDTO> wrapper = new Wrapper<>();
+        PaginationInfo paginationInfo = new PaginationInfo();
+
+        paginationInfo.setCurrentPage(pageNo);
+        paginationInfo.setHasNext(pageNo < (raceService.getNumberOfRaces()));
+
+
+        wrapper.setPaginationInfo(paginationInfo);
+
+        if(sortBy == null){
+            wrapper.setDto(raceService.getRacesByYear(pageNo, pageSize, year));
+        } else{
+            wrapper.setDto(raceService.getRacesByYear(pageNo, pageSize, sortBy, year));
+        }
+
+        return new ResponseEntity<>(wrapper, HttpStatus.OK);
     }
 
     @GetMapping(value = "/races/round/{round}/{year}", produces = MediaType.APPLICATION_JSON_VALUE)

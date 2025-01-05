@@ -11,4 +11,5 @@ public interface ConstructorService {
     List<ConstructorDTO> findAllConstructors(int pageNo, int pageSize, String sortBy);
     ConstructorDTO findConstructorByName(String constructorName);
     ConstructorDTO findConstructorById(int idConstructor);
+    List<String> findAllConstructorsByDriverId(int driverId);
 }

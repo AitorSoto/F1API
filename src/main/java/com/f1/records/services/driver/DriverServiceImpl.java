@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class DriverServiceImpl implements DriverService{
     @Override
     public List<DriverDTO> findAllDrivers(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<DriverDAO> drivers = driverRepository.findAll(pageable);
+        Page<DriverDAO> drivers = driverRepository.getAllDriversOrderedByVictories(pageable);
 
         return transfromListDAOIntoListDTO(drivers.getContent());
     }
@@ -40,6 +41,23 @@ public class DriverServiceImpl implements DriverService{
     @Override
     public DriverDTO findDriverBySurname(String forename, String surname) {
         return UniversalMapper.driverToDTO(driverRepository.getDriverDAOByForenameAndSurname(forename, surname));
+    }
+
+    @Override
+    public int getNumberOfDrivers() {
+        return (int)driverRepository.getNumberOfDrivers();
+    }
+
+    @Override
+    public DriverDTO findById(int id) {
+        return driverRepository.findById(id)
+                .map(UniversalMapper::driverToDTO)
+                .orElse(null);
+    }
+
+    @Override
+    public List<DriverDTO> findByName(String name) {
+        return transfromListDAOIntoListDTO(driverRepository.searchDrivers(name));
     }
 
     private List<DriverDTO> transfromListDAOIntoListDTO(List<DriverDAO> driverDAOS){
