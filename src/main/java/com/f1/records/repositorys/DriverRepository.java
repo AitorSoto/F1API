@@ -17,7 +17,13 @@ public interface DriverRepository extends PagingAndSortingRepository<DriverDAO, 
     @Query("select count(d) from DriverDAO d")
     long getNumberOfDrivers();
 
-    @Query("SELECT d FROM DriverDAO d INNER JOIN ResultDAO r ON d.driverId = r.driverId WHERE r.position = 1 GROUP BY d.driverId ORDER BY COUNT(DISTINCT r.raceId) DESC")
+    @Query("SELECT d " +
+            "FROM DriverDAO d " +
+            "LEFT JOIN ResultDAO r ON d.driverId = r.driverId " +
+            "GROUP BY d.driverId " +
+            "ORDER BY  " +
+            "    COUNT(DISTINCT CASE WHEN r.position = 1 THEN r.raceId ELSE NULL END) DESC," +
+            "    d.driverId")
     Page<DriverDAO> getAllDriversOrderedByVictories(Pageable pageable);
 
     @Query("SELECT d " +

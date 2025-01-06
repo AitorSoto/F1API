@@ -20,18 +20,7 @@ public interface ConstructorsRepository extends PagingAndSortingRepository<Const
             "JOIN r.constructorDAO c " +
             "JOIN r.raceDAO ra " +
             "WHERE r.driverId = :driverId " +
-            "GROUP BY c.name, ra.year " +  // Agrupamos por nombre del constructor y año
+            "GROUP BY c.name, ra.year " +
             "ORDER BY ra.year DESC")
     List<String> findConstructorsOfId(int driverId);
-
-    /*
-    * SELECT constructors.name
-    * FROM results
-    * INNER JOIN constructors
-    * ON results.constructor_id = constructors.constructor_id
-    * INNER JOIN races
-    * ON results.race_id = races.race_id
-    * WHERE results.driver_id = 4
-    * GROUP BY races.year
-    * ORDER BY races.year desc;*/
 }
