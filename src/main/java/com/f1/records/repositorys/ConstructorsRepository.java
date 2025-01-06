@@ -19,8 +19,8 @@ public interface ConstructorsRepository extends PagingAndSortingRepository<Const
             "FROM ResultDAO r " +
             "JOIN r.constructorDAO c " +
             "JOIN r.raceDAO ra " +
-            "WHERE r.driverId = :driverId " +
-            "GROUP BY c.name, ra.year " +
+            "WHERE r.driverId = ?1 " +
+            "GROUP BY ra.year " +
             "ORDER BY ra.year DESC")
     List<String> findConstructorsOfId(int driverId);
 }
